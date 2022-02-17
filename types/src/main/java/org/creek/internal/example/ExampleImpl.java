@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2022 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-package org.creek.api.example;
+package org.creek.internal.example;
 
-public interface Example {
 
-    boolean getTrue();
+import org.creek.api.example.Example;
+
+public final class ExampleImpl implements Example {
+    @Override
+    public boolean getTrue() {
+        return true;
+    }
 }
