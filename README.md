@@ -4,4 +4,4 @@
 
 # Creek Base
 
-Base types and annotations
+[Base types](type) and [annotations](annotation)
