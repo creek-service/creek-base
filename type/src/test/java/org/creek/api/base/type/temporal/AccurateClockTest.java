@@ -23,8 +23,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import java.time.Instant;
-import org.creek.api.type.temporal.AccurateClock;
-import org.creek.api.type.temporal.Clock;
 import org.junit.jupiter.api.Test;
 
 class AccurateClockTest {

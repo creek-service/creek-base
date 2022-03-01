@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.creek.api.type.temporal;
+package org.creek.api.base.type.temporal;
 
 
 import java.time.Instant;
