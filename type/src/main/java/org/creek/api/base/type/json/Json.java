@@ -16,20 +16,21 @@
 
 package org.creek.api.base.type.json;
 
-import java.util.Optional;
-import java.util.Set;
-
 /**
  * JSON helper methods.
  *
- * Consider this class private.
+ * <p>Consider this class private.
  */
 public final class Json {
 
     private static final int ISO_CONTROL_ESCAPE_COUNT = 5;
 
+    private Json() {}
+
     /**
-     * Do an in-place replacement to escape characters in {@code toEscape} starting from {@code startPos}.
+     * Do an in-place replacement to escape characters in {@code toEscape} starting from {@code
+     * startPos}.
+     *
      * @param toEscape the SB holding the text to escape
      * @param startPos the position within {@code toEscape} to start the escaping from.
      */
@@ -116,10 +117,12 @@ public final class Json {
         }
     }
 
-    private static int escapeAndDecrement(final StringBuilder toAppendTo, int lastPos, final char c) {
-        toAppendTo.setCharAt(lastPos--, c);
-        toAppendTo.setCharAt(lastPos--, '\\');
-        return lastPos;
+    private static int escapeAndDecrement(
+            final StringBuilder toAppendTo, final int lastPos, final char c) {
+        int pos = lastPos;
+        toAppendTo.setCharAt(pos--, c);
+        toAppendTo.setCharAt(pos--, '\\');
+        return pos;
     }
 
     private static char upperCaseHex(final int digit) {

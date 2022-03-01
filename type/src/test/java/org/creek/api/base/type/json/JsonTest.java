@@ -16,17 +16,16 @@
 
 package org.creek.api.base.type.json;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.startsWith;
+
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 class JsonTest {
 
@@ -98,14 +97,14 @@ class JsonTest {
     public static Stream<Character> nonEscapedChars() {
         return IntStream.range(Character.MIN_VALUE, Character.MAX_VALUE)
                 .filter(JsonTest::notEscaped)
-                .mapToObj(i -> (Character)(char)i);
+                .mapToObj(i -> (Character) (char) i);
     }
 
     public static Stream<Character> isoControlChars() {
         return IntStream.range(Character.MIN_VALUE, Character.MAX_VALUE)
                 .filter(Character::isISOControl)
                 .filter(JsonTest::notExplicitlyEscaped)
-                .mapToObj(i -> (Character)(char)i);
+                .mapToObj(i -> (Character) (char) i);
     }
 
     private static boolean notEscaped(final int c) {
@@ -132,7 +131,8 @@ class JsonTest {
         assertEscaped(new StringBuilder(input), input, is(input + expected));
     }
 
-    private void assertEscaped(final StringBuilder sb, final String input, final Matcher<String> matcher) {
+    private void assertEscaped(
+            final StringBuilder sb, final String input, final Matcher<String> matcher) {
         final int startPos = sb.length();
         sb.append(input);
         Json.escapeJson(sb, startPos);
