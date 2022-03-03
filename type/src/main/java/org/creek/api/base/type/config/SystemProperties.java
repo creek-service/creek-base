@@ -16,15 +16,14 @@
 
 package org.creek.api.base.type.config;
 
+
 import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Utility class to get Creek config from System properties
- */
+/** Utility class to get Creek config from System properties */
 public final class SystemProperties {
 
-    private SystemProperties(){}
+    private SystemProperties() {}
 
     public static Optional<String> getString(final String name) {
         return Optional.ofNullable(property(name, null, String.class, Function.identity()));
@@ -35,7 +34,7 @@ public final class SystemProperties {
     }
 
     public static Optional<Integer> getInt(final String name) {
-        return  Optional.ofNullable(property(name, null, int.class, Integer::parseInt));
+        return Optional.ofNullable(property(name, null, int.class, Integer::parseInt));
     }
 
     public static int getInt(final String name, final int defaultVal) {
@@ -43,14 +42,18 @@ public final class SystemProperties {
     }
 
     public static Optional<Long> getLong(final String name) {
-        return  Optional.ofNullable(property(name, null, long.class, Long::parseLong));
+        return Optional.ofNullable(property(name, null, long.class, Long::parseLong));
     }
 
     public static Long getLong(final String name, final long defaultVal) {
         return property(name, defaultVal, long.class, Long::parseLong);
     }
 
-    private static <T> T property(final String name, final T defaultVal, final Class<T> type, final Function<String, T> parser) {
+    private static <T> T property(
+            final String name,
+            final T defaultVal,
+            final Class<T> type,
+            final Function<String, T> parser) {
         final String value = System.getProperty(name);
         if (value == null) {
             return defaultVal;
@@ -64,8 +67,19 @@ public final class SystemProperties {
     }
 
     static final class ParseException extends RuntimeException {
-         ParseException(final String propName, final String value, final Class<?> type, final Throwable cause) {
-             super("Failed to parse system property: " + propName + ", value: " + value + ", as_type: " + type, cause);
+        ParseException(
+                final String propName,
+                final String value,
+                final Class<?> type,
+                final Throwable cause) {
+            super(
+                    "Failed to parse system property: "
+                            + propName
+                            + ", value: "
+                            + value
+                            + ", as_type: "
+                            + type,
+                    cause);
         }
     }
 }

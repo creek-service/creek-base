@@ -16,15 +16,14 @@
 
 package org.creek.api.base.type.config;
 
-import org.junit.jupiter.api.Test;
-import org.junitpioneer.jupiter.SetSystemProperty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThrows;
 
 import java.util.Optional;
-
-import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.SetSystemProperty;
 
 class SystemPropertiesTest {
 
@@ -46,11 +45,15 @@ class SystemPropertiesTest {
     @Test
     void shouldThrowOnInvalidInt() {
         // When:
-        final Exception e = assertThrows(SystemProperties.ParseException.class, () -> SystemProperties.getInt("k"));
+        final Exception e =
+                assertThrows(
+                        SystemProperties.ParseException.class, () -> SystemProperties.getInt("k"));
 
         // Then:
-        assertThat(e.getMessage(), is("Failed to parse system property: k, value: invalid, as_type: int"));
-                assertThat(e.getCause(), is(instanceOf(NumberFormatException.class)));
+        assertThat(
+                e.getMessage(),
+                is("Failed to parse system property: k, value: invalid, as_type: int"));
+        assertThat(e.getCause(), is(instanceOf(NumberFormatException.class)));
     }
 
     @SetSystemProperty(key = "k", value = "-101")
@@ -64,10 +67,14 @@ class SystemPropertiesTest {
     @Test
     void shouldThrowOnInvalidLong() {
         // When:
-        final Exception e = assertThrows(SystemProperties.ParseException.class, () -> SystemProperties.getLong("k"));
+        final Exception e =
+                assertThrows(
+                        SystemProperties.ParseException.class, () -> SystemProperties.getLong("k"));
 
         // Then:
-        assertThat(e.getMessage(), is("Failed to parse system property: k, value: invalid, as_type: long"));
+        assertThat(
+                e.getMessage(),
+                is("Failed to parse system property: k, value: invalid, as_type: long"));
         assertThat(e.getCause(), is(instanceOf(NumberFormatException.class)));
     }
 }
