@@ -95,9 +95,15 @@ class JsonTest {
     }
 
     public static Stream<Character> nonEscapedChars() {
-        return IntStream.range(Character.MIN_VALUE, Character.MAX_VALUE)
+        // ISO Control chars are:
+        //     (codePoint >= 0x0000 && codePoint <= 0x001F) ||
+        //     (codePoint >= 0x007F && codePoint <= 0x009F);
+        // Test over range 0xFFF0 -> 0x00FF, which covers the escaped range and more.
+        return Stream.concat(
+                        IntStream.range(0xFFF0, 0xFFFF).boxed(),
+                        IntStream.range(0x0, 0x00FF).boxed())
                 .filter(JsonTest::notEscaped)
-                .mapToObj(i -> (Character) (char) i);
+                .map(i -> (char) i.intValue());
     }
 
     public static Stream<Character> isoControlChars() {
