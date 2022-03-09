@@ -7,5 +7,5 @@ val spotBugsVersion : String by extra
 dependencies {
     // Do not add any non-test runtime dependencies
 
-    testImplementation("com.github.spotbugs:spotbugs-annotations:${spotBugsVersion}")
+    testImplementation("com.github.spotbugs:spotbugs-annotations:$spotBugsVersion")
 }
