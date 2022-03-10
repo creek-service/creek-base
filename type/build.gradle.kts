@@ -5,7 +5,7 @@ plugins {
 val spotBugsVersion : String by extra
 
 dependencies {
-    implementation(project(":annotation"))
+    api(project(":annotation"))
 
     // Do not add any other non-test runtime dependencies
 
