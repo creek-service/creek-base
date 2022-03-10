@@ -1,5 +1,5 @@
 module creek.base.type {
-    requires creek.base.annotation;
+    requires transitive creek.base.annotation;
 
     exports org.creek.api.base.type;
     exports org.creek.api.base.type.config;
