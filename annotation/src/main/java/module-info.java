@@ -1,3 +1,3 @@
-module creek.base.type {
+module creek.base.annotation {
     exports org.creek.api.base.annotation;
 }

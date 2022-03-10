@@ -1,3 +1,5 @@
+import org.javamodularity.moduleplugin.extensions.CompileTestModuleOptions
+
 plugins {
     `java-library`
 }
