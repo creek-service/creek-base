@@ -19,6 +19,7 @@ package org.creek.api.base.type.config;
 
 import java.util.Optional;
 import java.util.function.Function;
+import org.creek.api.base.annotation.VisibleForTesting;
 
 /** Utility class to get Creek config from System properties */
 public final class SystemProperties {
@@ -66,6 +67,7 @@ public final class SystemProperties {
         }
     }
 
+    @VisibleForTesting
     static final class ParseException extends RuntimeException {
         ParseException(
                 final String propName,
