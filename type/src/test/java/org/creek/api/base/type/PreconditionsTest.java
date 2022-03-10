@@ -21,9 +21,13 @@ import static org.creek.api.base.type.Preconditions.requireNonEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -35,19 +39,138 @@ class PreconditionsTest {
     private static final String ARG_NAME = "some-arg";
 
     @Nested
-    final class NonEmptyTest {
+    final class NonEmptyArrayTest {
         @Test
-        void shouldThrowOnNullString() {
+        void shouldThrowOnNull() {
             // When:
             final Exception e =
-                    assertThrows(NullPointerException.class, () -> requireNonEmpty(null, ARG_NAME));
+                    assertThrows(
+                            NullPointerException.class,
+                            () -> requireNonEmpty((String[]) null, ARG_NAME));
 
             // Then:
             assertThat(e.getMessage(), containsString(ARG_NAME));
         }
 
         @Test
-        void shouldThrowOnEmptyString() {
+        void shouldThrowOnEmpty() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () -> requireNonEmpty(new String[0], ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), is(ARG_NAME + " can not be empty"));
+        }
+
+        @Test
+        void shouldReturnValidParam() {
+            // Given:
+            final String[] valid = {""};
+
+            // When:
+            final String[] result = requireNonEmpty(valid, ARG_NAME);
+
+            // Then:
+            assertThat(result, is(sameInstance(valid)));
+        }
+    }
+
+    @Nested
+    final class NonEmptyCollectionTest {
+        @Test
+        void shouldThrowOnNull() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            NullPointerException.class,
+                            () -> requireNonEmpty((Collection<?>) null, ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), containsString(ARG_NAME));
+        }
+
+        @Test
+        void shouldThrowOnEmpty() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () -> requireNonEmpty(List.of(), ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), is(ARG_NAME + " can not be empty"));
+        }
+
+        @Test
+        void shouldReturnValidParam() {
+            // Given:
+            final List<String> valid = List.of("x");
+
+            // When:
+            final List<String> result = requireNonEmpty(valid, ARG_NAME);
+
+            // Then:
+            assertThat(result, is(sameInstance(valid)));
+        }
+    }
+
+    @Nested
+    final class NonEmptyMapTest {
+        @Test
+        void shouldThrowOnNull() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            NullPointerException.class,
+                            () -> requireNonEmpty((Map<?, ?>) null, ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), containsString(ARG_NAME));
+        }
+
+        @Test
+        void shouldThrowOnEmpty() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () -> requireNonEmpty(Map.of(), ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), is(ARG_NAME + " can not be empty"));
+        }
+
+        @Test
+        void shouldReturnValidParam() {
+            // Given:
+            final Map<Integer, String> valid = Map.of(1, "x");
+
+            // When:
+            final Map<Integer, String> result = requireNonEmpty(valid, ARG_NAME);
+
+            // Then:
+            assertThat(result, is(sameInstance(valid)));
+        }
+    }
+
+    @Nested
+    final class NonEmptyStringTest {
+        @Test
+        void shouldThrowOnNull() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            NullPointerException.class,
+                            () -> requireNonEmpty((String) null, ARG_NAME));
+
+            // Then:
+            assertThat(e.getMessage(), containsString(ARG_NAME));
+        }
+
+        @Test
+        void shouldThrowOnEmpty() {
             // When:
             final Exception e =
                     assertThrows(
@@ -58,15 +181,22 @@ class PreconditionsTest {
         }
 
         @Test
-        void shouldNotThrowOnNonEmptyString() {
-            requireNonEmpty(" ", ARG_NAME);
+        void shouldReturnValidParam() {
+            // Given:
+            final String valid = "x";
+
+            // When:
+            final String result = requireNonEmpty(valid, ARG_NAME);
+
+            // Then:
+            assertThat(result, is(sameInstance(valid)));
         }
     }
 
     @Nested
     final class NonBlankTest {
         @Test
-        void shouldThrowOnNullString() {
+        void shouldThrowOnNull() {
             // When:
             final Exception e =
                     assertThrows(NullPointerException.class, () -> requireNonBlank(null, ARG_NAME));
@@ -76,7 +206,7 @@ class PreconditionsTest {
         }
 
         @Test
-        void shouldThrowOnBlankString() {
+        void shouldThrowOnBlank() {
             // When:
             final Exception e =
                     assertThrows(
@@ -87,8 +217,15 @@ class PreconditionsTest {
         }
 
         @Test
-        void shouldNotThrowOnNonBlankString() {
-            requireNonBlank(".", ARG_NAME);
+        void shouldReturnValidParam() {
+            // Given:
+            final String valid = "x";
+
+            // When:
+            final String result = requireNonBlank(valid, ARG_NAME);
+
+            // Then:
+            assertThat(result, is(sameInstance(valid)));
         }
     }
 }
