@@ -18,12 +18,60 @@ package org.creek.api.base.type;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.Map;
+
 public final class Preconditions {
 
     private Preconditions() {}
 
     /**
-     * Test that string is not empty, i.e. has non-zero length.
+     * Test that an array is not empty.
+     *
+     * @param value the collection to test.
+     * @param name the name to use in the exception, if the check fails.
+     * @return {@code value} if the check passes.
+     */
+    public static <T> T[] requireNonEmpty(final T[] value, final String name) {
+        requireNonNull(value, name);
+        if (value.length == 0) {
+            throw new IllegalArgumentException(name + " can not be empty");
+        }
+        return value;
+    }
+
+    /**
+     * Test that a collection is not empty.
+     *
+     * @param value the collection to test.
+     * @param name the name to use in the exception, if the check fails.
+     * @return {@code value} if the check passes.
+     */
+    public static <T extends Collection<?>> T requireNonEmpty(final T value, final String name) {
+        requireNonNull(value, name);
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException(name + " can not be empty");
+        }
+        return value;
+    }
+
+    /**
+     * Test that a map is not empty.
+     *
+     * @param value the map to test.
+     * @param name the name to use in the exception, if the check fails.
+     * @return {@code value} if the check passes.
+     */
+    public static <T extends Map<?, ?>> T requireNonEmpty(final T value, final String name) {
+        requireNonNull(value, name);
+        if (value.isEmpty()) {
+            throw new IllegalArgumentException(name + " can not be empty");
+        }
+        return value;
+    }
+
+    /**
+     * Test that a string is not empty, i.e. has non-zero length.
      *
      * @param value the string to test.
      * @param name the name to use in the exception, if the check fails.
