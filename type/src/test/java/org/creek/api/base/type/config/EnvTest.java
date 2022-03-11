@@ -1,10 +1,20 @@
+/*
+ * Copyright 2022 Creek Contributors (https://github.com/creek-service)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.creek.api.base.type.config;
-
-import org.junit.jupiter.api.Test;
-import org.junitpioneer.jupiter.SetEnvironmentVariable;
-
-import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
 
 import static java.time.temporal.ChronoUnit.DECADES;
 import static java.time.temporal.ChronoUnit.SECONDS;
@@ -13,7 +23,12 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.lang.reflect.InvocationTargetException;
+import java.time.Duration;
+import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.SetEnvironmentVariable;
 
 class EnvTest {
 
@@ -138,7 +153,9 @@ class EnvTest {
         assertThat(Env.<Thing>readInstance("missing", Thing2::new), is(instanceOf(Thing2.class)));
     }
 
-    @SetEnvironmentVariable(key = "a-key", value = "org.creek.api.base.type.config.EnvTest$BadThing")
+    @SetEnvironmentVariable(
+            key = "a-key",
+            value = "org.creek.api.base.type.config.EnvTest$BadThing")
     @Test
     void shouldNotSwallowExceptionsThrownByInstance() {
         // When:
@@ -149,7 +166,8 @@ class EnvTest {
 
         // Then:
         assertThat(e.getMessage(), containsString("a-key"));
-        assertThat(e.getMessage(), containsString("org.creek.api.base.type.config.EnvTest$BadThing"));
+        assertThat(
+                e.getMessage(), containsString("org.creek.api.base.type.config.EnvTest$BadThing"));
         assertThat(e.getCause(), is(instanceOf(InvocationTargetException.class)));
         assertThat(e.getCause().getCause(), is(instanceOf(RuntimeException.class)));
         assertThat(e.getCause().getCause().getMessage(), is("Big Bada Boom"));
