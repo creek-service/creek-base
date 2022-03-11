@@ -22,9 +22,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.function.Supplier;
 
 /** Utility class to get Creek config from environment variables */
-public final class Env {
+public final class SystemEnv {
 
-    private Env() {}
+    private SystemEnv() {}
 
     /**
      * Get an integer environment variable or a default if the variable is not set.
