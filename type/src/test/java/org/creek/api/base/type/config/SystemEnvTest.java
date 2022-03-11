@@ -149,7 +149,9 @@ class SystemEnvTest {
         assertThat(e.getMessage(), containsString("Not a class"));
     }
 
-    @SetEnvironmentVariable(key = "a-key", value = "org.creek.api.base.type.config.SystemEnvTest$Thing1")
+    @SetEnvironmentVariable(
+            key = "a-key",
+            value = "org.creek.api.base.type.config.SystemEnvTest$Thing1")
     @Test
     void shouldReadInstance() {
         assertThat(
@@ -173,7 +175,8 @@ class SystemEnvTest {
         // Then:
         assertThat(e.getMessage(), containsString("a-key"));
         assertThat(
-                e.getMessage(), containsString("org.creek.api.base.type.config.SystemEnvTest$BadThing"));
+                e.getMessage(),
+                containsString("org.creek.api.base.type.config.SystemEnvTest$BadThing"));
         assertThat(e.getCause(), is(instanceOf(InvocationTargetException.class)));
         assertThat(e.getCause().getCause(), is(instanceOf(RuntimeException.class)));
         assertThat(e.getCause().getCause().getMessage(), is("Big Bada Boom"));
