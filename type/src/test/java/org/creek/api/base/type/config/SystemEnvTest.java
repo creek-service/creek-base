@@ -48,8 +48,8 @@ class SystemEnvTest {
                 assertThrows(IllegalArgumentException.class, () -> SystemEnv.readInt("a-key", 19));
 
         // Then:
-        assertThat(e.getMessage(), containsString("a-key"));
-        assertThat(e.getMessage(), containsString("Not a number"));
+        assertThat(e.getMessage(), containsString("name: a-key"));
+        assertThat(e.getMessage(), containsString("value: Not a number"));
     }
 
     @SetEnvironmentVariable(key = "a-key", value = "265")

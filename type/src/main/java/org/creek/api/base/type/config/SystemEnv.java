@@ -172,7 +172,7 @@ public final class SystemEnv {
 
         EnvException(
                 final String msg, final String name, final Object value, final Throwable cause) {
-            super(msg + " from env var: " + name + ", value:  " + value, cause);
+            super(msg + " from environment variable. name: " + name + ", value: " + value, cause);
         }
     }
 }
