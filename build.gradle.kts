@@ -52,7 +52,7 @@ subprojects {
         set("creekVersion", "+")
         set("spotBugsVersion", "4.5.3")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
 
-        set("guavaVersion", "31.0.1-jre")       // https://mvnrepository.com/artifact/com.google.guava/guava
+        set("guavaVersion", "31.1-jre")       // https://mvnrepository.com/artifact/com.google.guava/guava
         set("log4jVersion", "2.14.1")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 
         set("junitVersion", "5.8.2")            // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
