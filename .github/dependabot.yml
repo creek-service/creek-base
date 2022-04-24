@@ -9,11 +9,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    reviewers:
-      - creek-service/code-reviewers
   - package-ecosystem: gradle
     directory: /
     schedule:
       interval: weekly
-    reviewers:
-      - creek-service/code-reviewers
