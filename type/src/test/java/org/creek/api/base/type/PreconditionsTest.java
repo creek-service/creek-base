@@ -17,6 +17,7 @@
 package org.creek.api.base.type;
 
 import static org.creek.api.base.type.Preconditions.require;
+import static org.creek.api.base.type.Preconditions.requireEqual;
 import static org.creek.api.base.type.Preconditions.requireNonBlank;
 import static org.creek.api.base.type.Preconditions.requireNonEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -227,6 +228,50 @@ class PreconditionsTest {
 
             // Then:
             assertThat(result, is(sameInstance(valid)));
+        }
+    }
+
+    @Nested
+    final class EqualTest {
+        @Test
+        void shouldNotThrowIfBothNull() {
+            // When:
+            requireEqual(null, null, "msg");
+
+            // Then: did not throw.
+        }
+
+        @Test
+        void shouldThrowIfOneNull() {
+            // When:
+            final Exception e0 =
+                    assertThrows(
+                            IllegalArgumentException.class, () -> requireEqual(null, 1, "msg"));
+            final Exception e1 =
+                    assertThrows(
+                            IllegalArgumentException.class, () -> requireEqual(1, null, "msg"));
+
+            // Then:
+            assertThat(e0.getMessage(), is("msg null != 1"));
+            assertThat(e1.getMessage(), is("msg 1 != null"));
+        }
+
+        @Test
+        void shouldThrowIfNotEqual() {
+            // When:
+            final Exception e =
+                    assertThrows(IllegalArgumentException.class, () -> requireEqual(10, 11, "msg"));
+
+            // Then:
+            assertThat(e.getMessage(), is("msg 10 != 11"));
+        }
+
+        @Test
+        void shouldNotThrowIfEqual() {
+            // When:
+            requireEqual(11L, 11L, "msg");
+
+            // Then: did not throw.
         }
     }
 
