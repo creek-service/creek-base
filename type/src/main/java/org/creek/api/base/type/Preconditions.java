@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 public final class Preconditions {
 
@@ -98,6 +99,19 @@ public final class Preconditions {
             throw new IllegalArgumentException(name + " can not be blank");
         }
         return value;
+    }
+
+    /**
+     * Test two values are equal.
+     *
+     * @param a the first value to test
+     * @param b the second value to test
+     * @param msg the message to use in the exception if the check fails.
+     */
+    public static <T> void requireEqual(final T a, final T b, final String msg) {
+        if (!Objects.equals(a, b)) {
+            throw new IllegalArgumentException(msg + " " + a + " != " + b);
+        }
     }
 
     /**
