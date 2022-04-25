@@ -5,4 +5,4 @@
 
 # Creek Base
 
-[Base types](type) and [annotations](annotation)
+Base [annotations](annotation), [types](type) and code for [schema](schema) handling. 
