@@ -16,6 +16,7 @@
 
 package org.creek.api.base.type;
 
+import static org.creek.api.base.type.Preconditions.require;
 import static org.creek.api.base.type.Preconditions.requireNonBlank;
 import static org.creek.api.base.type.Preconditions.requireNonEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -226,6 +227,28 @@ class PreconditionsTest {
 
             // Then:
             assertThat(result, is(sameInstance(valid)));
+        }
+    }
+
+    @Nested
+    final class RequiredTest {
+        @Test
+        void shouldThrowOnFalse() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class, () -> require(false, "some message"));
+
+            // Then:
+            assertThat(e.getMessage(), is("some message"));
+        }
+
+        @Test
+        void shouldNotThrowOnTrue() {
+            // When:
+            require(true, "some message");
+
+            // Then: did not throw
         }
     }
 }
