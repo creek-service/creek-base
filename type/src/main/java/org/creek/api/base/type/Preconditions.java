@@ -99,4 +99,16 @@ public final class Preconditions {
         }
         return value;
     }
+
+    /**
+     * Generic requirement test.
+     *
+     * @param test boolean indicating if condition was met
+     * @param msg the message to add to the exception if the condition is not met.
+     */
+    public static void require(final boolean test, final String msg) {
+        if (!test) {
+            throw new IllegalArgumentException(msg);
+        }
+    }
 }
