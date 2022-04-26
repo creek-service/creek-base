@@ -39,6 +39,11 @@ class SubTypeNamingTest {
     }
 
     @Test
+    void shouldDeriveNameOfClassStartingWithLowerCaseLetter() {
+        assertThat(subTypeName(lowerThing.class, Thing.class), is("lower"));
+    }
+
+    @Test
     void shouldDoSomethingSensibleWithWierdNames() {
         assertThat(
                 subTypeName(_$Weird_Class_$NAme_.class, Thing.class),
@@ -93,6 +98,9 @@ class SubTypeNamingTest {
     private interface TotallyDifferentName extends Thing {}
 
     private interface SomeThingDifferent extends Thing {}
+
+    @SuppressWarnings("checkstyle:TypeName")
+    private interface lowerThing extends Thing {}
 
     @SuppressWarnings("checkstyle:TypeName")
     private interface _$Weird_Class_$NAme_ extends Thing {}
