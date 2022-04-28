@@ -37,13 +37,12 @@ public final class JarVersion {
      * @param typeInJar any type from the jar in question.
      * @return the version, if it can be determined.
      */
-    public static Optional<String> determinePluginVersion(final Class<?> typeInJar) {
-        return determinePluginVersion(
-                typeInJar.getProtectionDomain().getCodeSource().getLocation());
+    public static Optional<String> jarVersion(final Class<?> typeInJar) {
+        return jarVersion(typeInJar.getProtectionDomain().getCodeSource().getLocation());
     }
 
     @VisibleForTesting
-    static Optional<String> determinePluginVersion(final URL location) {
+    static Optional<String> jarVersion(final URL location) {
         final Matcher jarMatcher = JAR_PATTERN.matcher(location.toString());
         if (!jarMatcher.matches()) {
             return Optional.empty();

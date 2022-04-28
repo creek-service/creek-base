@@ -16,7 +16,7 @@
 
 package org.creek.api.base.type;
 
-import static org.creek.api.base.type.JarVersion.determinePluginVersion;
+import static org.creek.api.base.type.JarVersion.jarVersion;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -29,37 +29,34 @@ import org.junit.jupiter.api.Test;
 class JarVersionTest {
     @Test
     void shouldGetVersionFromJar() {
-        assertThat(determinePluginVersion(VisibleForTesting.class), is(not(Optional.empty())));
+        assertThat(JarVersion.jarVersion(VisibleForTesting.class), is(not(Optional.empty())));
     }
 
     @Test
     void shouldReturnEmptyWhenRunningInTheBuildAndThereIsNoJar() throws Exception {
         assertThat(
-                determinePluginVersion(
-                        URI.create("file:/blah/blah/type/build/classes/java/test/").toURL()),
+                jarVersion(URI.create("file:/blah/blah/type/build/classes/java/test/").toURL()),
                 is(Optional.empty()));
     }
 
     @Test
     void shouldReturnEmptyIfSomeWeirdJarName() throws Exception {
         assertThat(
-                determinePluginVersion(
-                        URI.create("file:/blah/blah/a-version-less-jar.jar").toURL()),
+                jarVersion(URI.create("file:/blah/blah/a-version-less-jar.jar").toURL()),
                 is(Optional.empty()));
     }
 
     @Test
     void shouldReturnVersionForSemantic() throws Exception {
         assertThat(
-                determinePluginVersion(URI.create("file:/blah/blah/some-jar-0.1.3.jar").toURL()),
+                jarVersion(URI.create("file:/blah/blah/some-jar-0.1.3.jar").toURL()),
                 is(Optional.of("0.1.3")));
     }
 
     @Test
     void shouldReturnVersionForSemanticSnapshot() throws Exception {
         assertThat(
-                determinePluginVersion(
-                        URI.create("file:/blah/blah/some-jar-0.1.3-SNAPSHOT.jar").toURL()),
+                jarVersion(URI.create("file:/blah/blah/some-jar-0.1.3-SNAPSHOT.jar").toURL()),
                 is(Optional.of("0.1.3-SNAPSHOT")));
     }
 }
