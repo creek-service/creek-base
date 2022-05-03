@@ -21,7 +21,12 @@ jobs:
           cache: gradle
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: increment Version Part
+      - name: Increment Version Part
         run: |
           git fetch --tags --unshallow
           ./gradlew markNextVersion -Prelease.incrementer=increment${{ github.event.inputs.part }}
+      - name: Trigger Build
+        run: |
+          curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/gradle.yml/dispatches" -d '{"ref":"main","inputs":{"publish":"true"}}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.TRIGGER_GITHUB_TOKEN }}
