@@ -29,6 +29,8 @@ jobs:
       run: ./gradlew check coveralls
     - name: Publish
       if: github.event_name == 'push'
-      run: ./gradlew publish
+      run: |
+        git fetch --tags --unshallow
+        ./gradlew publish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

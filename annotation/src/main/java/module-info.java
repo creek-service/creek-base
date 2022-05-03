@@ -1,4 +1,4 @@
 module creek.base.annotation {
-    exports org.creek.api.base.annotation;
-    exports org.creek.api.base.annotation.schema;
+    exports org.creekservice.api.base.annotation;
+    exports org.creekservice.api.base.annotation.schema;
 }
