@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       part:
-        description: Which part to increment? Major, Minor or Patch. Default is Patch.
-        required: false
+        description: "Part to increment: Major, Minor or Patch"
+        required: true
         default: Patch
 
 jobs:
