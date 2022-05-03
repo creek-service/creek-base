@@ -1,0 +1,27 @@
+name: Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      part:
+        description: Which part to increment? Major, Minor or Patch. Default is Patch.
+        required: false
+        default: Patch
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: increment Version Part
+        run: |
+          git fetch --tags --unshallow
+          ./gradlew markNextVersion -Prelease.incrementer=increment${{ github.event.inputs.part }}
