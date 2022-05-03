@@ -49,11 +49,11 @@ subprojects {
     project.version = project.parent?.version!!
 
     extra.apply {
-        set("creekVersion", "+")
-        set("spotBugsVersion", "4.6.0")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
+        set("creekTestVersion", "+")
 
+        set("spotBugsVersion", "4.6.0")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.146")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
-        set("guavaVersion", "31.1-jre")       // https://mvnrepository.com/artifact/com.google.guava/guava
+        set("guavaVersion", "31.1-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
         set("log4jVersion", "2.17.2")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 
         set("junitVersion", "5.8.2")            // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
@@ -62,7 +62,7 @@ subprojects {
         set("hamcrestVersion", "2.2")           // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core
     }
 
-    val creekVersion : String by extra
+    val creekTestVersion : String by extra
     val guavaVersion : String by extra
     val log4jVersion : String by extra
     val junitVersion: String by extra
@@ -71,9 +71,9 @@ subprojects {
     val hamcrestVersion : String by extra
 
     dependencies {
-        testImplementation("org.creek:creek-test-util:$creekVersion")
-        testImplementation("org.creek:creek-test-hamcrest:$creekVersion")
-        testImplementation("org.creek:creek-test-conformity:$creekVersion")
+        testImplementation("org.creek:creek-test-util:$creekTestVersion")
+        testImplementation("org.creek:creek-test-hamcrest:$creekTestVersion")
+        testImplementation("org.creek:creek-test-conformity:$creekTestVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
         testImplementation("org.junit-pioneer:junit-pioneer:$junitPioneerVersion")
@@ -118,13 +118,13 @@ subprojects {
     spotbugs {
         tasks.spotbugsMain {
             reports.create("html") {
-                isEnabled = true
+                enabled = true
                 setStylesheet("fancy-hist.xsl")
             }
         }
         tasks.spotbugsTest {
             reports.create("html") {
-                isEnabled = true
+                enabled = true
                 setStylesheet("fancy-hist.xsl")
             }
         }
