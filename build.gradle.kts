@@ -49,7 +49,7 @@ subprojects {
     project.version = project.parent?.version!!
 
     extra.apply {
-        set("creekTestVersion", "+")
+        set("creekTestVersion", "0.1.25-SNAPSHOT")
 
         set("spotBugsVersion", "4.6.0")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.146")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
@@ -71,9 +71,9 @@ subprojects {
     val hamcrestVersion : String by extra
 
     dependencies {
-        testImplementation("org.creek:creek-test-util:$creekTestVersion")
-        testImplementation("org.creek:creek-test-hamcrest:$creekTestVersion")
-        testImplementation("org.creek:creek-test-conformity:$creekTestVersion")
+        testImplementation("org.creekservice:creek-test-util:$creekTestVersion")
+        testImplementation("org.creekservice:creek-test-hamcrest:$creekTestVersion")
+        testImplementation("org.creekservice:creek-test-conformity:$creekTestVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
         testImplementation("org.junit-pioneer:junit-pioneer:$junitPioneerVersion")
