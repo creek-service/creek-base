@@ -49,7 +49,7 @@ subprojects {
     project.version = project.parent?.version!!
 
     extra.apply {
-        set("creekTestVersion", "0.1.25-SNAPSHOT")
+        set("creekTestVersion", "0.2.0-SNAPSHOT")
 
         set("spotBugsVersion", "4.6.0")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.146")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
