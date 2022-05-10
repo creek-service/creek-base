@@ -6,7 +6,7 @@ plugins {
     id("com.diffplug.spotless") version "6.5.2"                 // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
     id("pl.allegro.tech.build.axion-release") version "1.13.6"  // https://mvnrepository.com/artifact/pl.allegro.tech.build.axion-release/pl.allegro.tech.build.axion-release.gradle.plugin?repo=gradle-plugins
     id("com.github.kt3k.coveralls") version "2.12.0"            // https://plugins.gradle.org/plugin/com.github.kt3k.coveralls
-    id("org.javamodularity.moduleplugin") version "1.8.10"      // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
+    id("org.javamodularity.moduleplugin") version "1.8.10" apply false     // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
 }
 
 project.version = scmVersion.version
@@ -14,7 +14,6 @@ project.version = scmVersion.version
 allprojects {
     apply(plugin = "idea")
     apply(plugin = "java")
-    apply(plugin = "jacoco")
     apply(plugin = "checkstyle")
     apply(plugin = "com.diffplug.spotless")
     apply(plugin = "com.github.spotbugs")
@@ -45,6 +44,13 @@ allprojects {
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "org.javamodularity.moduleplugin")
+
+    configure(subprojects
+            // Exclude test modules from code coverage
+            - project(":test-module")
+    ) {
+        apply(plugin = "jacoco")
+    }
 
     project.version = project.parent?.version!!
 
@@ -130,7 +136,7 @@ subprojects {
         }
     }
 
-    tasks.jacocoTestReport {
+    tasks.withType<JacocoReport>().configureEach{
         dependsOn(tasks.test)
     }
 
@@ -146,24 +152,26 @@ subprojects {
         dependsOn("checkstyleMain", "checkstyleTest", "spotbugsMain", "spotbugsTest")
     }
 
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/creek-service/${rootProject.name}")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
+    if (!project.name.startsWith("test-")) {
+        publishing {
+            repositories {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/creek-service/${rootProject.name}")
+                    credentials {
+                        username = System.getenv("GITHUB_ACTOR")
+                        password = System.getenv("GITHUB_TOKEN")
+                    }
                 }
             }
-        }
-        publications {
-            create<MavenPublication>("maven") {
-                from(components["java"])
-                artifactId = "${rootProject.name}-${project.name}"
+            publications {
+                create<MavenPublication>("maven") {
+                    from(components["java"])
+                    artifactId = "${rootProject.name}-${project.name}"
 
-                pom {
-                    url.set("https://github.com/creek-service/${rootProject.name}.git")
+                    pom {
+                        url.set("https://github.com/creek-service/${rootProject.name}.git")
+                    }
                 }
             }
         }

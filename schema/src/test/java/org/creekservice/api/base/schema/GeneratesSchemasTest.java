@@ -17,33 +17,149 @@
 package org.creekservice.api.base.schema;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
+import org.creekservice.api.base.test.module.ApiModel;
 import org.junit.jupiter.api.Test;
 
 class GeneratesSchemasTest {
 
+    private static final String INTERNAL_CLASS_NAME = "InternalModel";
+
     @Test
     void shouldFindPublicAnnotatedTypes() {
         // When:
+        final Set<Class<?>> result = GeneratesSchemas.scanner().scan();
+
+        // Then:
+        assertThat(result, hasItems(PublicTestType.class, ApiModel.class));
+    }
+
+    @Test
+    void shouldFindInternalAnnotatedTypes() {
+        // When:
+        final Set<Class<?>> result = GeneratesSchemas.scanner().scan();
+
+        // Then:
+        assertThat(classNames(result), hasItem(INTERNAL_CLASS_NAME));
+    }
+
+    @Test
+    void shouldNotFindNonPublicAnnotatedTypes() {
+        // When:
+        final Set<Class<?>> result = GeneratesSchemas.scanner().scan();
+
+        // Then:
+        assertThat(result, not(hasItem(NonPublicTestType.class)));
+    }
+
+    @Test
+    void shouldFindTypesThatPassLiteralPackageFilter() {
+        // When:
         final Set<Class<?>> result =
-                GeneratesSchemas.findAnnotatedTypes(GeneratesSchemasTest.class.getPackageName());
+                GeneratesSchemas.scanner()
+                        .withAllowedPackages(GeneratesSchemasTest.class.getPackageName())
+                        .scan();
 
         // Then:
         assertThat(result, hasItem(PublicTestType.class));
     }
 
     @Test
-    void shouldNotFindNonPublicAnnotatedTypes() {
+    void shouldFindTypesUsingWildcardInPackageName() {
         // When:
         final Set<Class<?>> result =
-                GeneratesSchemas.findAnnotatedTypes(GeneratesSchemasTest.class.getPackageName());
+                GeneratesSchemas.scanner().withAllowedPackages("org.creekservice.*.schema").scan();
 
         // Then:
-        assertThat(result, not(hasItem(NonPublicTestType.class)));
+        assertThat(result, hasItem(PublicTestType.class));
+    }
+
+    @Test
+    void shouldFindTypesUsingJustWildcard() {
+        // When:
+        final Set<Class<?>> result = GeneratesSchemas.scanner().withAllowedPackages("*").scan();
+
+        // Then:
+        assertThat(result, hasItem(PublicTestType.class));
+    }
+
+    @Test
+    void shouldFindTypesInSubPackages() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner().withAllowedPackages("org.creekservice").scan();
+
+        // Then:
+        assertThat(result, hasItem(PublicTestType.class));
+    }
+
+    @Test
+    void shouldNotFindTypesInOtherPackages() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner()
+                        .withAllowedPackages("other.creekservice.api.base.schema")
+                        .scan();
+
+        // Then:
+        assertThat(result, not(hasItem(PublicTestType.class)));
+    }
+
+    @Test
+    void shouldNotFindTypesInOtherPackagesUsingWildcard() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner()
+                        .withAllowedPackages("other.creekservice.*.schema")
+                        .scan();
+
+        // Then:
+        assertThat(result, not(hasItem(PublicTestType.class)));
+    }
+
+    @Test
+    void shouldFindTypeInRightModule() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner().withAllowedModules("creek.base.test.module").scan();
+
+        // Then:
+        assertThat(
+                classNames(result), contains(ApiModel.class.getSimpleName(), INTERNAL_CLASS_NAME));
+    }
+
+    @Test
+    void shouldNotFindTypeInOtherModule() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner().withAllowedModules("creek.base.test.module").scan();
+
+        // Then:
+        assertThat(result, not(hasItem(PublicTestType.class)));
+    }
+
+    @Test
+    void shouldFilterBasedOnPackageAndModule() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner()
+                        .withAllowedPackages("*.api.*")
+                        .withAllowedModules("creek.base.test.module")
+                        .scan();
+
+        // Then:
+        assertThat(classNames(result), contains(ApiModel.class.getSimpleName()));
+    }
+
+    private static Set<String> classNames(final Set<Class<?>> result) {
+        return result.stream().map(Class::getSimpleName).collect(Collectors.toSet());
     }
 
     @GeneratesSchema
