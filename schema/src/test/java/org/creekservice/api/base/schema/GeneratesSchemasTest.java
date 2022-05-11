@@ -136,6 +136,31 @@ class GeneratesSchemasTest {
     }
 
     @Test
+    void shouldFindTypeInModuleUsingWildcard() {
+        // When:
+        final Set<Class<?>> result =
+                GeneratesSchemas.scanner().withAllowedModules("creek.base.*.module").scan();
+
+        // Then:
+        assertThat(
+                classNames(result), contains(ApiModel.class.getSimpleName(), INTERNAL_CLASS_NAME));
+    }
+
+    @Test
+    void shouldFindTypeInModuleUsingJustWildcard() {
+        // When:
+        final Set<Class<?>> result = GeneratesSchemas.scanner().withAllowedModules("*").scan();
+
+        // Then:
+        assertThat(
+                classNames(result),
+                hasItems(
+                        ApiModel.class.getSimpleName(),
+                        INTERNAL_CLASS_NAME,
+                        PublicTestType.class.getSimpleName()));
+    }
+
+    @Test
     void shouldNotFindTypeInOtherModule() {
         // When:
         final Set<Class<?>> result =

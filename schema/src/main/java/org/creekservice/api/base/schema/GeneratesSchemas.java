@@ -16,17 +16,14 @@
 
 package org.creekservice.api.base.schema;
 
-import static java.util.Objects.requireNonNull;
 
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
-import io.github.classgraph.ModuleRef;
 import io.github.classgraph.ScanResult;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
 
@@ -84,7 +81,8 @@ public final class GeneratesSchemas {
          * <p>By default, types from any module are returned. Specifying one or more allowed modules
          * restricts the returned types to only those types that belong to an allowed module.
          *
-         * @param allowedModules allowed module names to add.
+         * @param allowedModules allowed module names to add. Module names may include the glob
+         *     wildcard {@code *} character.
          * @return self
          */
         public Scanner withAllowedModules(final Collection<String> allowedModules) {
@@ -98,7 +96,8 @@ public final class GeneratesSchemas {
          * <p>By default, types from any module are returned. Specifying one or more allowed modules
          * restricts the returned types to only those types that belong to an allowed module.
          *
-         * @param allowedModules allowed module names to add.
+         * @param allowedModules allowed module names to add. Module names may include the glob
+         *     wildcard {@code *} character.
          * @return self
          */
         public Scanner withAllowedModules(final String... allowedModules) {
@@ -111,40 +110,18 @@ public final class GeneratesSchemas {
          * @return the list of all types annotated with {@link GeneratesSchema}.
          */
         public Set<Class<?>> scan() {
-            final ModuleFilter moduleFilter = new ModuleFilter(allowedModules);
-
             try (ScanResult sr =
                     new ClassGraph()
                             .enableClassInfo()
                             .enableAnnotationInfo()
                             .acceptPackages(allowedPackages.toArray(String[]::new))
+                            .acceptModules(allowedModules.toArray(String[]::new))
                             .scan()) {
 
                 return sr.getClassesWithAnnotation(GeneratesSchema.class.getName()).stream()
-                        .filter(moduleFilter)
                         .map(ClassInfo::loadClass)
                         .collect(Collectors.toUnmodifiableSet());
             }
-        }
-    }
-
-    private static final class ModuleFilter implements Predicate<ClassInfo> {
-        private final Set<String> allowedModules;
-
-        ModuleFilter(final Collection<String> allowedModules) {
-            this.allowedModules = Set.copyOf(requireNonNull(allowedModules, "allowedModules"));
-        }
-
-        @Override
-        public boolean test(final ClassInfo classInfo) {
-            if (allowedModules.isEmpty()) {
-                return true;
-            }
-
-            final ModuleRef moduleRef = classInfo.getModuleRef();
-            return moduleRef != null
-                    && moduleRef.getName() != null
-                    && allowedModules.contains(moduleRef.getName());
         }
     }
 }
