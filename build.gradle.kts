@@ -41,16 +41,15 @@ allprojects {
     }
 }
 
+configure(subprojects) {
+    if (!name.startsWith("test-")) {
+        apply(plugin = "jacoco")
+    }
+}
+
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "org.javamodularity.moduleplugin")
-
-    configure(subprojects
-            // Exclude test modules from code coverage
-            - project(":test-module")
-    ) {
-        apply(plugin = "jacoco")
-    }
 
     project.version = project.parent?.version!!
 
