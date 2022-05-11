@@ -41,15 +41,13 @@ allprojects {
     }
 }
 
-configure(subprojects) {
-    if (!name.startsWith("test-")) {
-        apply(plugin = "jacoco")
-    }
-}
-
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "org.javamodularity.moduleplugin")
+
+    if (!name.startsWith("test-")) {
+        apply(plugin = "jacoco")
+    }
 
     project.version = project.parent?.version!!
 
