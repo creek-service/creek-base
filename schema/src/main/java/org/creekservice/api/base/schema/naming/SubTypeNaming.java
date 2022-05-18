@@ -25,13 +25,13 @@ public final class SubTypeNaming {
      * Get the type name of a subtype of a polymorphic type.
      *
      * <p>Given a subtype {@code FooBar} of a base type {@code Bar}, this method will return {@code
-     * bar}.
+     * foo}.
      *
      * <p>Given a subtype {@code AnotherFooBar} of a base type {@code Bar}, this method will return
-     * {@code another_bar}.
+     * {@code another_foo}.
      *
      * <p>When the subtype does not end with base type name this method returns the subtype name in
-     * lowercase.
+     * lowercase, with {@code _} separating when capital letters were found
      *
      * @param subType the subtype of the {@code baseType}
      * @param baseType the base type
@@ -39,15 +39,37 @@ public final class SubTypeNaming {
      */
     public static <T> String subTypeName(
             final Class<? extends T> subType, final Class<T> baseType) {
+        return subTypeName(subType, baseType.getSimpleName());
+    }
+
+    /**
+     * Get the type name of a subtype of a polymorphic type.
+     *
+     * <p>Given a subtype {@code FooBar} of a base type {@code Bar}, this method will return {@code
+     * foo}.
+     *
+     * <p>Given a subtype {@code AnotherFooBar} of a base type {@code Bar}, this method will return
+     * {@code another_foo}.
+     *
+     * <p>When the subtype does not end with base type name this method returns the subtype name in
+     * lowercase, with {@code _} separating when capital letters were found.
+     *
+     * @param subType the subtype of the {@code baseType}
+     * @param baseTypeName the base type's simple name
+     * @return the subtype name
+     */
+    public static <T> String subTypeName(
+            final Class<? extends T> subType, final String baseTypeName) {
         if (subType.isAnonymousClass() || subType.isSynthetic()) {
             throw new IllegalArgumentException(
                     "Anonymous/synthetic types are not supported: " + subType);
         }
 
-        final String base = baseType.getSimpleName();
         final String sub = subType.getSimpleName();
         final String prefix =
-                sub.endsWith(base) ? sub.substring(0, sub.length() - base.length()) : sub;
+                sub.endsWith(baseTypeName)
+                        ? sub.substring(0, sub.length() - baseTypeName.length())
+                        : sub;
         final String name = prefix.replaceAll("([A-Z])", "_$1").toLowerCase();
         return name.startsWith("_") ? name.substring(1) : name;
     }

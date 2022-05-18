@@ -29,6 +29,7 @@ class SubTypeNamingTest {
     void shouldReturnPrefixIfSubTypeNamedEndsInBaseType() {
         assertThat(subTypeName(SomeThing.class, Thing.class), is("some"));
         assertThat(subTypeName(SomeOtherThing.class, Thing.class), is("some_other"));
+        assertThat(subTypeName(SomeOtherThing.class, "Thing"), is("some_other"));
     }
 
     @Test
@@ -36,6 +37,7 @@ class SubTypeNamingTest {
         assertThat(
                 subTypeName(TotallyDifferentName.class, Thing.class), is("totally_different_name"));
         assertThat(subTypeName(SomeThingDifferent.class, Thing.class), is("some_thing_different"));
+        assertThat(subTypeName(SomeThingDifferent.class, "Thing"), is("some_thing_different"));
     }
 
     @Test
