@@ -188,8 +188,12 @@ class GeneratesSchemasTest {
     }
 
     @GeneratesSchema
-    public static final class PublicTestType {}
+    public static final class PublicTestType {
+        PublicTestType() {}
+    }
 
     @GeneratesSchema
-    static final class NonPublicTestType {}
+    static final class NonPublicTestType {
+        NonPublicTestType() {}
+    }
 }
