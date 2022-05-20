@@ -184,9 +184,13 @@ class SystemEnvTest {
 
     interface Thing {}
 
-    public static class Thing1 implements Thing {}
+    public static class Thing1 implements Thing {
+        Thing1() {}
+    }
 
-    public static class Thing2 implements Thing {}
+    public static class Thing2 implements Thing {
+        Thing2() {}
+    }
 
     @SuppressWarnings("unused") // Invoked via reflection
     public static class BadThing implements Thing {
