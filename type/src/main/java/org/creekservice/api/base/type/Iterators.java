@@ -22,9 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-/**
- * Util methods for iterators.
- */
+/** Util methods for iterators. */
 public final class Iterators {
 
     private Iterators() {}
