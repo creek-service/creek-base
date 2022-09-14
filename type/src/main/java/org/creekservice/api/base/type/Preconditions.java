@@ -115,6 +115,70 @@ public final class Preconditions {
     }
 
     /**
+     * Test one value is less than another
+     *
+     * @param value the value to test
+     * @param upperBound the upper bound of valid values for {@code value}
+     * @param msg the message prefix
+     * @param <T> the type
+     */
+    public static <T extends Comparable<T>> void requireLessThan(
+            final T value, final T upperBound, final String msg) {
+        if (value.compareTo(upperBound) >= 0) {
+            throw new IllegalArgumentException(
+                    msg + " must be less than " + upperBound + ", but was " + value);
+        }
+    }
+
+    /**
+     * Test one value is less, or equal to, than another
+     *
+     * @param value the value to test
+     * @param upperBound the upper bound of valid values for {@code value}
+     * @param msg the message prefix
+     * @param <T> the type
+     */
+    public static <T extends Comparable<T>> void requireLessThanOrEqualTo(
+            final T value, final T upperBound, final String msg) {
+        if (value.compareTo(upperBound) > 0) {
+            throw new IllegalArgumentException(
+                    msg + " must be less than or equal to " + upperBound + ", but was " + value);
+        }
+    }
+
+    /**
+     * Test one value is greater than another
+     *
+     * @param value the value to test
+     * @param lowerBound the lower bound of valid values for {@code value}
+     * @param msg the message prefix
+     * @param <T> the type
+     */
+    public static <T extends Comparable<T>> void requireGreaterThan(
+            final T value, final T lowerBound, final String msg) {
+        if (value.compareTo(lowerBound) <= 0) {
+            throw new IllegalArgumentException(
+                    msg + " must be greater than " + lowerBound + ", but was " + value);
+        }
+    }
+
+    /**
+     * Test one value is greater than, or equal to, another
+     *
+     * @param value the value to test
+     * @param lowerBound the lower bound of valid values for {@code value}
+     * @param msg the message prefix
+     * @param <T> the type
+     */
+    public static <T extends Comparable<T>> void requireGreaterThanOrEqualTo(
+            final T value, final T lowerBound, final String msg) {
+        if (value.compareTo(lowerBound) < 0) {
+            throw new IllegalArgumentException(
+                    msg + " must be greater than or equal to " + lowerBound + ", but was " + value);
+        }
+    }
+
+    /**
      * Generic requirement test.
      *
      * @param test boolean indicating if condition was met

@@ -18,6 +18,10 @@ package org.creekservice.api.base.type;
 
 import static org.creekservice.api.base.type.Preconditions.require;
 import static org.creekservice.api.base.type.Preconditions.requireEqual;
+import static org.creekservice.api.base.type.Preconditions.requireGreaterThan;
+import static org.creekservice.api.base.type.Preconditions.requireGreaterThanOrEqualTo;
+import static org.creekservice.api.base.type.Preconditions.requireLessThan;
+import static org.creekservice.api.base.type.Preconditions.requireLessThanOrEqualTo;
 import static org.creekservice.api.base.type.Preconditions.requireNonBlank;
 import static org.creekservice.api.base.type.Preconditions.requireNonEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -272,6 +276,100 @@ class PreconditionsTest {
             requireEqual(11L, 11L, "msg");
 
             // Then: did not throw.
+        }
+    }
+
+    @Nested
+    final class LessThanTest {
+        @Test
+        void shouldThrowOnFalse() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class, () -> requireLessThan(10, 9, "msg"));
+            assertThrows(IllegalArgumentException.class, () -> requireLessThan(10, 10, "msg"));
+
+            // Then:
+            assertThat(e.getMessage(), is("msg must be less than 9, but was 10"));
+        }
+
+        @Test
+        void shouldNotThrowOnTrue() {
+            // When:
+            requireLessThan(10, 11, "msg");
+
+            // Then: did not throw
+        }
+    }
+
+    @Nested
+    final class LessThanOrEqualToTest {
+        @Test
+        void shouldThrowOnFalse() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () -> requireLessThanOrEqualTo(10, 9, "msg"));
+
+            // Then:
+            assertThat(e.getMessage(), is("msg must be less than or equal to 9, but was 10"));
+        }
+
+        @Test
+        void shouldNotThrowOnTrue() {
+            // When:
+            requireLessThanOrEqualTo(10, 10, "msg");
+            requireLessThanOrEqualTo(9, 10, "msg");
+
+            // Then: did not throw
+        }
+    }
+
+    @Nested
+    final class GreaterThanTest {
+        @Test
+        void shouldThrowOnFalse() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class, () -> requireGreaterThan(9, 10, "msg"));
+            assertThrows(IllegalArgumentException.class, () -> requireGreaterThan(10, 10, "msg"));
+
+            // Then:
+            assertThat(e.getMessage(), is("msg must be greater than 10, but was 9"));
+        }
+
+        @Test
+        void shouldNotThrowOnTrue() {
+            // When:
+            requireGreaterThan(11, 10, "msg");
+
+            // Then: did not throw
+        }
+    }
+
+    @Nested
+    final class GreaterThanOrEqualToTest {
+        @Test
+        void shouldThrowOnFalse() {
+            // When:
+            final Exception e =
+                    assertThrows(
+                            IllegalArgumentException.class,
+                            () -> requireGreaterThanOrEqualTo(9, 10, "msg"));
+
+            // Then:
+            assertThat(e.getMessage(), is("msg must be greater than or equal to 10, but was 9"));
+        }
+
+        @Test
+        void shouldNotThrowOnTrue() {
+            // When:
+            requireGreaterThanOrEqualTo(10, 10, "msg");
+            requireGreaterThanOrEqualTo(10, 9, "msg");
+
+            // Then: did not throw
         }
     }
 
