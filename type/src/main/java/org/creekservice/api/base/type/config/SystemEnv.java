@@ -151,6 +151,7 @@ public final class SystemEnv {
      *
      * @param name the name of the variable to read
      * @param defaultValue supplier of a default insstance to use if the variable is not set.
+     * @param <T> The type to instantiate
      * @return the instance of the type set in the variable, or the result of {@code
      *     defaultValue.get()} if not set.
      */
@@ -168,6 +169,11 @@ public final class SystemEnv {
         }
     }
 
+    /**
+     * Hidden.
+     *
+     * @hidden
+     */
     private static final class EnvException extends IllegalArgumentException {
 
         EnvException(

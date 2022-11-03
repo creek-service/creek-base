@@ -22,10 +22,23 @@ import java.io.IOException;
 /** As checked exceptions are a PITA. */
 public final class RuntimeIOException extends RuntimeException {
 
+    /**
+     * Factory method
+     *
+     * @param cause exception to wrap
+     * @return new instance
+     */
     public static RuntimeIOException runtimeIOException(final IOException cause) {
         return new RuntimeIOException(cause);
     }
 
+    /**
+     * Factory method
+     *
+     * @param msg the exception msg
+     * @param cause exception to wrap
+     * @return new instance
+     */
     public static RuntimeIOException runtimeIOException(final String msg, final IOException cause) {
         return new RuntimeIOException(msg, cause);
     }

@@ -30,7 +30,9 @@ public final class Iterators {
     /**
      * An iterator that iterates over the elements in a list in reverse.
      *
+     * @param list the list to reverse
      * @param <E> the element type.
+     * @return reverse iterator
      */
     public static <E> Iterator<E> reverseIterator(final List<E> list) {
         return new ReverseListIterator<>(list);

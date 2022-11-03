@@ -26,26 +26,65 @@ public final class SystemProperties {
 
     private SystemProperties() {}
 
+    /**
+     * Get a string system property
+     *
+     * @param name the property name
+     * @return the property
+     */
     public static Optional<String> getString(final String name) {
         return Optional.ofNullable(property(name, null, String.class, Function.identity()));
     }
 
+    /**
+     * Get a string system property
+     *
+     * @param name the property name
+     * @param defaultVal the default value to use if property not set
+     * @return the property, or the supplied default.
+     */
     public static String getString(final String name, final String defaultVal) {
         return property(name, defaultVal, String.class, Function.identity());
     }
 
+    /**
+     * Get an int system property
+     *
+     * @param name the property name
+     * @return the property
+     */
     public static Optional<Integer> getInt(final String name) {
         return Optional.ofNullable(property(name, null, int.class, Integer::parseInt));
     }
 
+    /**
+     * Get an int system property
+     *
+     * @param name the property name
+     * @param defaultVal the default value to use if property not set
+     * @return the property, or the supplied default.
+     */
     public static int getInt(final String name, final int defaultVal) {
         return property(name, defaultVal, int.class, Integer::parseInt);
     }
 
+    /**
+     * Get a long system property
+     *
+     * @param name the property name
+     * @return the property
+     */
     public static Optional<Long> getLong(final String name) {
         return Optional.ofNullable(property(name, null, long.class, Long::parseLong));
     }
 
+    /**
+     * Get a long system property
+     *
+     * @param name the property name
+     * @param defaultVal the default value to use if property not set
+     * @return the property, or the supplied default.
+     */
     public static Long getLong(final String name, final long defaultVal) {
         return property(name, defaultVal, long.class, Long::parseLong);
     }
@@ -67,6 +106,7 @@ public final class SystemProperties {
         }
     }
 
+    /** @hidden */
     @VisibleForTesting
     static final class ParseException extends RuntimeException {
         ParseException(

@@ -20,17 +20,25 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Supplier;
 
+/** Factory methods for creating {@link Supplier suppliers} */
 public final class Suppliers {
 
     private Suppliers() {}
 
+    /**
+     * Create a Supplier that will cache the value returned from the {@code delegate} on first use.
+     *
+     * @param delegate the delegate that will be called once on first use.
+     * @param <T> the type of the supplier
+     * @return a caching Supplier.
+     */
     public static <T> Supplier<T> memoize(final Supplier<T> delegate) {
         return (delegate instanceof MemorizingSupplier)
                 ? delegate
                 : new MemorizingSupplier<>(delegate);
     }
 
-    public static final class MemorizingSupplier<T> implements Supplier<T> {
+    private static final class MemorizingSupplier<T> implements Supplier<T> {
 
         private final Supplier<T> delegate;
         private final Object lock = new Object();
