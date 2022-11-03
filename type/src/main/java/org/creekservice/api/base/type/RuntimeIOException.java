@@ -24,6 +24,7 @@ public final class RuntimeIOException extends RuntimeException {
 
     /**
      * Factory method
+     *
      * @param cause exception to wrap
      * @return new instance
      */
@@ -33,6 +34,7 @@ public final class RuntimeIOException extends RuntimeException {
 
     /**
      * Factory method
+     *
      * @param msg the exception msg
      * @param cause exception to wrap
      * @return new instance

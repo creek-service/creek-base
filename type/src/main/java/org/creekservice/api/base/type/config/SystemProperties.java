@@ -28,6 +28,7 @@ public final class SystemProperties {
 
     /**
      * Get a string system property
+     *
      * @param name the property name
      * @return the property
      */
@@ -37,6 +38,7 @@ public final class SystemProperties {
 
     /**
      * Get a string system property
+     *
      * @param name the property name
      * @param defaultVal the default value to use if property not set
      * @return the property, or the supplied default.
@@ -47,6 +49,7 @@ public final class SystemProperties {
 
     /**
      * Get an int system property
+     *
      * @param name the property name
      * @return the property
      */
@@ -56,6 +59,7 @@ public final class SystemProperties {
 
     /**
      * Get an int system property
+     *
      * @param name the property name
      * @param defaultVal the default value to use if property not set
      * @return the property, or the supplied default.
@@ -66,6 +70,7 @@ public final class SystemProperties {
 
     /**
      * Get a long system property
+     *
      * @param name the property name
      * @return the property
      */
@@ -75,6 +80,7 @@ public final class SystemProperties {
 
     /**
      * Get a long system property
+     *
      * @param name the property name
      * @param defaultVal the default value to use if property not set
      * @return the property, or the supplied default.
@@ -100,9 +106,7 @@ public final class SystemProperties {
         }
     }
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     @VisibleForTesting
     static final class ParseException extends RuntimeException {
         ParseException(

@@ -171,6 +171,7 @@ public final class SystemEnv {
 
     /**
      * Hidden.
+     *
      * @hidden
      */
     private static final class EnvException extends IllegalArgumentException {

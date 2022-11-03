@@ -22,9 +22,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Factory methods for asserting preconditions
- */
+/** Factory methods for asserting preconditions */
 public final class Preconditions {
 
     private Preconditions() {}

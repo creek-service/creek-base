@@ -20,15 +20,14 @@ package org.creekservice.api.base.type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Util class for working with {@code List}.
- */
+/** Util class for working with {@code List}. */
 public final class Lists {
 
     private Lists() {}
 
     /**
      * Combine to lists
+     *
      * @param a first list
      * @param b second list
      * @param <T> element type

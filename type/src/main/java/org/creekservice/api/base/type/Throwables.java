@@ -20,15 +20,14 @@ package org.creekservice.api.base.type;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-/**
- * Utility class for working with {@link Throwable}
- */
+/** Utility class for working with {@link Throwable} */
 public final class Throwables {
 
     private Throwables() {}
 
     /**
      * Get the stack trace of the supplied {@link Throwable}.
+     *
      * @param t the throwable
      * @return the stack trace
      */

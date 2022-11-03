@@ -43,30 +43,37 @@ public final class Primitives {
 
     /**
      * Test if type is unboxed primitive.
+     *
      * @param type the type to check
-     * @return {@code true} if {@code type} is a primitive type */
+     * @return {@code true} if {@code type} is a primitive type
+     */
     public static boolean isUnboxedPrimitive(final Class<?> type) {
         return PRIMITIVES.containsKey(type);
     }
 
     /**
      * Test if type is boxed primitive.
+     *
      * @param type the type to check
-     * @return {@code true} if {@code type} is a wrapper type for a primitive */
+     * @return {@code true} if {@code type} is a wrapper type for a primitive
+     */
     public static boolean isBoxedPrimitive(final Class<?> type) {
         return BOXED.containsKey(type);
     }
 
     /**
      * Convert type to its boxed equivalent, where one exists
+     *
      * @param type the type to box
-     * @return if {@code type} is a primitive: it's boxed type, otherwise {@code type}. */
+     * @return if {@code type} is a primitive: it's boxed type, otherwise {@code type}.
+     */
     public static Class<?> box(final Class<?> type) {
         return PRIMITIVES.getOrDefault(type, type);
     }
 
     /**
      * Convert type to its unboxed equivalent, where one exists
+     *
      * @param type the type to unbox
      * @return if {@code type} is a boxed primitive: it's primitive type, otherwise {@code type}.
      */

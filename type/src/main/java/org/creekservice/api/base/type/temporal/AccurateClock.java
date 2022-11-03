@@ -24,6 +24,7 @@ public final class AccurateClock implements Clock {
 
     /**
      * Create instance
+     *
      * @return new instance
      */
     public static Clock create() {

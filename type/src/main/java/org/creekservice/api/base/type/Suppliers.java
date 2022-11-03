@@ -20,15 +20,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Supplier;
 
-/**
- * Factory methods for creating {@link Supplier suppliers}
- */
+/** Factory methods for creating {@link Supplier suppliers} */
 public final class Suppliers {
 
     private Suppliers() {}
 
     /**
      * Create a Supplier that will cache the value returned from the {@code delegate} on first use.
+     *
      * @param delegate the delegate that will be called once on first use.
      * @param <T> the type of the supplier
      * @return a caching Supplier.
