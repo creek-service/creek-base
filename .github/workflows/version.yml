@@ -6,7 +6,7 @@ on:
       part:
         description: "Part to increment: Major, Minor or Patch"
         required: true
-        default: Minor
+        default: Patch
 
 jobs:
   version:
