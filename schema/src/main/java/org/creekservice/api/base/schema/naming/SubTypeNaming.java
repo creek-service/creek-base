@@ -35,6 +35,7 @@ public final class SubTypeNaming {
      *
      * @param subType the subtype of the {@code baseType}
      * @param baseType the base type
+     * @param <T> the base type
      * @return the subtype name
      */
     public static <T> String subTypeName(
@@ -56,6 +57,7 @@ public final class SubTypeNaming {
      *
      * @param subType the subtype of the {@code baseType}
      * @param baseTypeName the base type's simple name
+     * @param <T> the base type
      * @return the subtype name
      */
     public static <T> String subTypeName(

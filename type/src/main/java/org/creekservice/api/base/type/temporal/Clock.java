@@ -23,5 +23,9 @@ import java.time.Instant;
 @FunctionalInterface
 public interface Clock {
 
+    /**
+     * Get current time.
+     * @return current time.
+     */
     Instant get();
 }

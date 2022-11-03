@@ -22,6 +22,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Factory methods for asserting preconditions
+ */
 public final class Preconditions {
 
     private Preconditions() {}
@@ -31,6 +34,7 @@ public final class Preconditions {
      *
      * @param value the collection to test.
      * @param name the name to use in the exception, if the check fails.
+     * @param <T> the value type
      * @return {@code value} if the check passes.
      */
     public static <T> T[] requireNonEmpty(final T[] value, final String name) {
@@ -46,6 +50,7 @@ public final class Preconditions {
      *
      * @param value the collection to test.
      * @param name the name to use in the exception, if the check fails.
+     * @param <T> the value type
      * @return {@code value} if the check passes.
      */
     public static <T extends Collection<?>> T requireNonEmpty(final T value, final String name) {
@@ -61,6 +66,7 @@ public final class Preconditions {
      *
      * @param value the map to test.
      * @param name the name to use in the exception, if the check fails.
+     * @param <T> the value type
      * @return {@code value} if the check passes.
      */
     public static <T extends Map<?, ?>> T requireNonEmpty(final T value, final String name) {
@@ -107,6 +113,7 @@ public final class Preconditions {
      * @param a the first value to test
      * @param b the second value to test
      * @param msg the message to use in the exception if the check fails.
+     * @param <T> the value type
      */
     public static <T> void requireEqual(final T a, final T b, final String msg) {
         if (!Objects.equals(a, b)) {
@@ -120,7 +127,7 @@ public final class Preconditions {
      * @param value the value to test
      * @param upperBound the upper bound of valid values for {@code value}
      * @param msg the message prefix
-     * @param <T> the type
+     * @param <T> the value type
      */
     public static <T extends Comparable<T>> void requireLessThan(
             final T value, final T upperBound, final String msg) {
@@ -136,7 +143,7 @@ public final class Preconditions {
      * @param value the value to test
      * @param upperBound the upper bound of valid values for {@code value}
      * @param msg the message prefix
-     * @param <T> the type
+     * @param <T> the value type
      */
     public static <T extends Comparable<T>> void requireLessThanOrEqualTo(
             final T value, final T upperBound, final String msg) {
@@ -152,7 +159,7 @@ public final class Preconditions {
      * @param value the value to test
      * @param lowerBound the lower bound of valid values for {@code value}
      * @param msg the message prefix
-     * @param <T> the type
+     * @param <T> the value type
      */
     public static <T extends Comparable<T>> void requireGreaterThan(
             final T value, final T lowerBound, final String msg) {
@@ -168,7 +175,7 @@ public final class Preconditions {
      * @param value the value to test
      * @param lowerBound the lower bound of valid values for {@code value}
      * @param msg the message prefix
-     * @param <T> the type
+     * @param <T> the value type
      */
     public static <T extends Comparable<T>> void requireGreaterThanOrEqualTo(
             final T value, final T lowerBound, final String msg) {

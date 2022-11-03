@@ -22,6 +22,10 @@ import java.time.Instant;
 /** Default clock impl. */
 public final class AccurateClock implements Clock {
 
+    /**
+     * Create instance
+     * @return new instance
+     */
     public static Clock create() {
         return new AccurateClock();
     }

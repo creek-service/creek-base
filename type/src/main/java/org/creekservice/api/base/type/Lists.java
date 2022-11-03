@@ -20,10 +20,20 @@ package org.creekservice.api.base.type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Util class for working with {@code List}.
+ */
 public final class Lists {
 
     private Lists() {}
 
+    /**
+     * Combine to lists
+     * @param a first list
+     * @param b second list
+     * @param <T> element type
+     * @return a list containing all the elements from {@code a} and then from {@code b}
+     */
     public static <T> List<T> combineList(final List<? extends T> a, final List<? extends T> b) {
         final List<T> result = new ArrayList<>(a);
         result.addAll(b);

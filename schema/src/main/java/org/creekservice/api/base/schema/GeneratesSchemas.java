@@ -28,17 +28,24 @@ import java.util.stream.Collectors;
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
 
 /**
- * Used to find instances of classes on the class or module path that are annotated with {@link
- * GeneratesSchema}.
+ * Utility class for working with {@link GeneratesSchema} annotated types.
  */
 public final class GeneratesSchemas {
 
     private GeneratesSchemas() {}
 
+    /**
+     * Factory method for {@link Scanner}
+     * @return new scanner instance
+     */
     public static Scanner scanner() {
         return new Scanner();
     }
 
+    /**
+     * Used to find instances of classes on the class or module path that are annotated with {@link
+     *  GeneratesSchema}.
+     */
     public static final class Scanner {
 
         private final Set<String> allowedPackages = new HashSet<>();
