@@ -9,7 +9,6 @@ plugins {
 group = "org.creekservice"
 
 java {
-    modularity.inferModulePath.set(false)
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
