@@ -1,7 +1,6 @@
 changelog:
   exclude:
     labels:
-      - release-prep
       - documentation
       - subtask
       - chore
