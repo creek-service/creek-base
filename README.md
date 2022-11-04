@@ -5,4 +5,14 @@
 
 # Creek Base
 
-Base [annotations](annotation), [types](type) and code for [schema](schema) handling. 
+Common code and types used internally by Creek.
+Not intended for use by others.
+
+See [CreekService.org](https://www.creekservice.org) for info on Creek Service. 
+
+## Modules
+
+* **[annotations](annotation)**: Dependency free module containing some common annotations.
+* **[types](type)**: Common code and types.
+* **[schema](schema)**: Common code around schema handling.
+
