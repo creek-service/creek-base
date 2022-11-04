@@ -2,6 +2,7 @@ plugins {
     java
     jacoco
     `creek-common-convention` apply false
+    `creek-module-convention` apply false
     `creek-coverage-convention`
     `creek-publishing-convention` apply false
     `creek-sonatype-publishing-convention`
@@ -14,6 +15,7 @@ subprojects {
     project.version = project.parent?.version!!
 
     apply(plugin = "creek-common-convention")
+    apply(plugin = "creek-module-convention")
 
     if (!name.startsWith("test-")) {
         apply(plugin = "creek-publishing-convention")

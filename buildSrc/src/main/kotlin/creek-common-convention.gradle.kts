@@ -4,13 +4,11 @@ plugins {
     checkstyle
     id("com.github.spotbugs")
     id("com.diffplug.spotless")
-    id("org.javamodularity.moduleplugin")
 }
 
 group = "org.creekservice"
 
 java {
-    modularity.inferModulePath.set(false)
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
@@ -90,4 +88,3 @@ tasks.register("static") {
     dependsOn("checkstyleMain", "checkstyleTest", "spotbugsMain", "spotbugsTest")
 }
 
-defaultTasks("format", "static", "check")
