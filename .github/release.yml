@@ -4,6 +4,7 @@ changelog:
       - release-prep
       - documentation
       - subtask
+      - chore
   categories:
     - title: Breaking Changes 🛠
       labels: [ breaking-change ]
