@@ -62,12 +62,4 @@ subprojects {
     }
 }
 
-scmVersion {
-    checks {
-        // Required until https://github.com/allegro/axion-release-plugin/issues/549 fixed
-        // As there is a circular test-only dependency between creek-base and creek-test:
-        snapshotDependencies.set(false)
-    }
-}
-
 defaultTasks("format", "static", "check")
