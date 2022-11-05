@@ -17,7 +17,9 @@ subprojects {
     apply(plugin = "creek-common-convention")
     apply(plugin = "creek-module-convention")
 
-    if (!name.startsWith("test-")) {
+    if (name.startsWith("test-")) {
+        tasks.javadoc { onlyIf { false } }
+    } else {
         apply(plugin = "creek-publishing-convention")
         apply(plugin = "jacoco")
     }
