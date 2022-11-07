@@ -70,8 +70,6 @@ tasks.jar {
     }
 }
 
-tasks.publish { dependsOn(tasks.publishPlugins) }
-
 publishing {
     repositories {
         maven {
