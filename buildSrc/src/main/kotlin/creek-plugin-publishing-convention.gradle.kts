@@ -15,17 +15,19 @@
  */
 
 /**
- * Standard configuration for Creek library publishing
+ * Configuration for Creek Gradle plugin publishing.
  *
- * <p> Apply this plugin only to subprojects if in multi-module setup.
+ * <p>Apply this plugin to any module publishing a Gradle plugin.
  *
- * <p> Use `creek-plugin-publishing-convention` for Gradle plugins.
+ * <p>Do NOT ally the `creek-publishing-convention`.
  */
 
 plugins {
     java
     signing
     `maven-publish`
+    `java-gradle-plugin`
+    id("com.gradle.plugin-publish")
 }
 
 java {
@@ -34,6 +36,13 @@ java {
 }
 
 val prependRootName = rootProject.name != project.name
+
+pluginBundle {
+    website = "https://www.creekservie.org"
+    vcsUrl = "https://github.com/creek-service/${rootProject.name}"
+
+    tags = listOf("creek", "creekservice", "microservice", "docker", "containers")
+}
 
 if (prependRootName) {
     tasks.jar {
@@ -51,6 +60,18 @@ tasks.javadoc {
     }
 }
 
+tasks.jar {
+    manifest {
+        if (prependRootName) {
+            attributes("Automatic-Module-Name" to "${rootProject.name}-${project.name}")
+        } else {
+            attributes("Automatic-Module-Name" to project.name)
+        }
+    }
+}
+
+tasks.publish { dependsOn(tasks.publishPlugins) }
+
 publishing {
     repositories {
         maven {
@@ -63,46 +84,43 @@ publishing {
         }
     }
 
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
+    publications.withType<MavenPublication>().configureEach {
+
+        if (prependRootName) {
+            artifactId = "${rootProject.name}-${project.name}"
+        }
+
+        pom {
+            name.set("${project.group}:${artifactId}")
 
             if (prependRootName) {
-                artifactId = "${rootProject.name}-${project.name}"
+                description.set("${rootProject.name.capitalize()} ${project.name} library".replace("-", " "))
+            } else {
+                description.set("${project.name.capitalize()} library".replace("-", " "))
             }
 
-            pom {
-                name.set("${project.group}:${artifactId}")
+            url.set("https://www.creekservice.org")
 
-                if (prependRootName) {
-                    description.set("${rootProject.name.capitalize()} ${project.name} library".replace("-", " "))
-                } else {
-                    description.set("${project.name.capitalize()} library".replace("-", " "))
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
                 }
+            }
 
-                url.set("https://www.creekservice.org")
-
-                licenses {
-                    license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-                    }
+            developers {
+                developer {
+                    name.set("Andy Coates")
+                    email.set("8012398+big-andy-coates@users.noreply.github.com")
+                    organization.set("Creek Service")
+                    organizationUrl.set("https://www.creekservice.org")
                 }
+            }
 
-                developers {
-                    developer {
-                        name.set("Andy Coates")
-                        email.set("8012398+big-andy-coates@users.noreply.github.com")
-                        organization.set("Creek Service")
-                        organizationUrl.set("https://www.creekservice.org")
-                    }
-                }
-
-                scm {
-                    connection.set("scm:git:git://github.com/creek-service/${rootProject.name}.git")
-                    developerConnection.set("scm:git:ssh://github.com/creek-service/${rootProject.name}.git")
-                    url.set("https://github.com/creek-service/${rootProject.name}")
-                }
+            scm {
+                connection.set("scm:git:git://github.com/creek-service/${rootProject.name}.git")
+                developerConnection.set("scm:git:ssh://github.com/creek-service/${rootProject.name}.git")
+                url.set("https://github.com/creek-service/${rootProject.name}")
             }
         }
     }
@@ -125,6 +143,4 @@ signing {
     if (project.hasProperty("signingKey")) {
         useInMemoryPgpKeys(properties["signingKey"].toString(), properties["signingPassword"].toString())
     }
-
-    sign(publishing.publications["mavenJava"])
 }
