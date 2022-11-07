@@ -95,6 +95,12 @@ spotbugs {
     }
 }
 
+if (rootProject.name != project.name) {
+    tasks.jar {
+        archiveBaseName.set("${rootProject.name}-${project.name}")
+    }
+}
+
 tasks.register("format") {
     group = "creek"
     description = "Format the code"

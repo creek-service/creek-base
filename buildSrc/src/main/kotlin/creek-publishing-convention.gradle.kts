@@ -33,14 +33,6 @@ java {
     withJavadocJar()
 }
 
-val prependRootName = rootProject.name != project.name
-
-if (prependRootName) {
-    tasks.jar {
-        archiveBaseName.set("${rootProject.name}-${project.name}")
-    }
-}
-
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).apply {
@@ -74,6 +66,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
 
+            val prependRootName = rootProject.name != project.name
             if (prependRootName) {
                 artifactId = "${rootProject.name}-${project.name}"
             }
