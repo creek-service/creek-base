@@ -20,4 +20,7 @@ package org.creekservice.api.base.test.module;
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
 
 @GeneratesSchema
-public final class ApiModel {}
+public final class ApiModel {
+
+    public ApiModel() {}
+}

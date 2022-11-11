@@ -23,9 +23,13 @@ import java.lang.annotation.RetentionPolicy;
 /** Documentation annotation for marking code with the date a feature was introduced. */
 @Retention(RetentionPolicy.SOURCE)
 public @interface Since {
-    /** @return the date the change was made */
+    /**
+     * @return the date the change was made
+     */
     String value();
 
-    /** @return optional additional comment */
+    /**
+     * @return optional additional comment
+     */
     String comment() default "";
 }
