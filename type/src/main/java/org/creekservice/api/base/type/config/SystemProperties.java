@@ -106,7 +106,9 @@ public final class SystemProperties {
         }
     }
 
-    /** @hidden */
+    /**
+     * @hidden
+     */
     @VisibleForTesting
     static final class ParseException extends RuntimeException {
         ParseException(
