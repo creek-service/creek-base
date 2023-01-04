@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.test.module;
 
-
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
 
 @GeneratesSchema

@@ -16,7 +16,6 @@
 
 package org.creekservice.internal.base.test.module;
 
-
 import org.creekservice.api.base.annotation.schema.GeneratesSchema;
 
 @SuppressWarnings("unused") // Accessed by class-graph

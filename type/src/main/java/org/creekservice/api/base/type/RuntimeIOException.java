@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type;
 
-
 import java.io.IOException;
 
 /** As checked exceptions are a PITA. */

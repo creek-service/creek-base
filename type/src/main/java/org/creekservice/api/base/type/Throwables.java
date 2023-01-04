@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type;
 
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 

@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type.config;
 
-
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Supplier;
