@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.annotation;
 
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

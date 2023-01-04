@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type.temporal;
 
-
 import java.time.Instant;
 
 /** Simple supplier of current time. */

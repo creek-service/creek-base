@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.schema;
 
-
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
