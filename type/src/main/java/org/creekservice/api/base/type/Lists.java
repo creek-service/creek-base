@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

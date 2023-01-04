@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type;
 
-
 import java.net.URL;
 import java.util.Optional;
 import java.util.regex.Matcher;

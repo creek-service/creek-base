@@ -16,7 +16,6 @@
 
 package org.creekservice.api.base.type.config;
 
-
 import java.util.Optional;
 import java.util.function.Function;
 import org.creekservice.api.base.annotation.VisibleForTesting;
