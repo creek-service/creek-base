@@ -1,6 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Coverage Status](https://coveralls.io/repos/github/creek-service/creek-base/badge.svg?branch=main)](https://coveralls.io/github/creek-service/creek-base?branch=main)
-[![build](https://github.com/creek-service/creek-base/actions/workflows/build.yml/badge.svg)](https://github.com/creek-service/creek-base/actions/workflows/build.yml)
+[![Build](https://github.com/creek-service/creek-base/actions/workflows/build.yml/badge.svg)](https://github.com/creek-service/creek-base/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/org.creekservice/creek-base-type.svg)](https://search.maven.org/artifact/org.creekservice/creek-base-type/)
 [![CodeQL](https://github.com/creek-service/creek-base/actions/workflows/codeql.yml/badge.svg)](https://github.com/creek-service/creek-base/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/creek-service/creek-base/badge)](https://api.securityscorecards.dev/projects/github.com/creek-service/creek-base)
