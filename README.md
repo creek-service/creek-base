@@ -4,7 +4,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.creekservice/creek-base-type.svg)](https://central.sonatype.dev/search?q=creek-base-*)
 [![CodeQL](https://github.com/creek-service/creek-base/actions/workflows/codeql.yml/badge.svg)](https://github.com/creek-service/creek-base/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/creek-service/creek-base/badge)](https://api.securityscorecards.dev/projects/github.com/creek-service/creek-base)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6891/badge)](https://bestpractices.coreinfrastructure.org/projects/6891)
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6899/badge)](https://bestpractices.coreinfrastructure.org/projects/6899)
 
 # Creek Base
 
