@@ -16,6 +16,7 @@
 
 package org.creekservice.api.base.type;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -30,6 +31,9 @@ public final class Throwables {
      * @param t the throwable
      * @return the stack trace
      */
+    @SuppressFBWarnings(
+            value = "INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE",
+            justification = "Intentional")
     public static String stackTrace(final Throwable t) {
         final StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
