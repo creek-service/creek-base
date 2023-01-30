@@ -23,11 +23,15 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.SOURCE)
 public @interface Since {
     /**
+     * Date of change.
+     *
      * @return the date the change was made
      */
     String value();
 
     /**
+     * Additional documentation about the change.
+     *
      * @return optional additional comment
      */
     String comment() default "";
