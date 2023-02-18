@@ -15,7 +15,7 @@ See [CreekService.org](https://www.creekservice.org) for info on Creek Service.
 
 ## Modules
 
-* **[annotations](annotation)**: Dependency free module containing some common annotations.
-* **[types](type)**: Common code and types.
-* **[schema](schema)**: Common code around schema handling.
+* **[annotations](annotation) [[JavaDocs](https://javadoc.io/doc/org.creekservice/creek-base-annotation)]**: Dependency free module containing some common annotations.
+* **[types](type) [[JavaDocs](https://javadoc.io/doc/org.creekservice/creek-base-type)]**: Common code and types.
+* **[schema](schema) [[JavaDocs](https://javadoc.io/doc/org.creekservice/creek-base-schema)]**: Common code around schema handling.
 
