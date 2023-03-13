@@ -1,6 +1,6 @@
 # A Workflow for messing around in.
 
-name: Playgroup
+name: "Dependabot: Auto-merge"
 on:
   pull_request:
     branches:
