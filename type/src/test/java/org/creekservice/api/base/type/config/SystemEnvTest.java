@@ -24,12 +24,17 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.junitpioneer.jupiter.SetEnvironmentVariable;
 
+@Isolated // This test uses @SetEnvironmentVariable, which modifies global env
+@Execution(SAME_THREAD) // ...this isn't thread-safe. So isolate from other tests.
 class SystemEnvTest {
 
     @SetEnvironmentVariable(key = "a-key", value = "-109")
