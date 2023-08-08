@@ -31,6 +31,9 @@ jobs:
         uses: actions/dependency-review-action@v3
         with:
           comment-summary-in-pr: true
+          # Think carefully about the implications of adding dependencies with new licence types.
+          # Licence ids: https://spdx.org/licenses/
+          # License risks: https://brainhub.eu/library/open-source-licenses-to-avoid
           allow-licenses: Apache-2.0, MIT
       - name: Fetch version history
         # Do NOT want to fetch all tags if building a specific tag.
