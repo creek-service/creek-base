@@ -49,7 +49,7 @@ jobs:
       - name: Build
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: ./gradlew build coveralls
+        run: ./gradlew build coveralls -DDEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS=RuntimeClasspath
       - name: Publish
         if: github.event_name == 'push' || github.event.inputs.publish_artifacts == 'true'
         env:
@@ -72,6 +72,7 @@ jobs:
           ./gradlew -Dgradle.publish.key="$GRADLE_PUBLISH_KEY" -Dgradle.publish.secret="$GRADLE_PUBLISH_SECRET" publishPlugins
 
   submit-dependencies:
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     permissions:
