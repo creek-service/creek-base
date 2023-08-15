@@ -5,12 +5,12 @@ name: Build
 
 on:
   push:
-    branches: 
+    branches:
       - main
     tags:
       - "v*.*.*"
   pull_request:
-    branches: 
+    branches:
       - main
   schedule:
     - cron: "39 5 1,15 * *"
@@ -44,7 +44,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          dependency-graph: generate
+          dependency-graph: generate-and-submit
           gradle-home-cache-cleanup: true
       - name: Build
         env:
