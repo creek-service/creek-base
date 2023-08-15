@@ -44,7 +44,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          dependency-graph: generate # todo: -and-submit
+          dependency-graph: generate
           gradle-home-cache-cleanup: true
       - name: Build
         env:
