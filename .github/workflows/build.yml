@@ -5,10 +5,15 @@ name: Build
 
 on:
   push:
-    branches: [ main ]
-    tags: [ "v*.*.*" ]
+    branches: 
+      - main
+    tags:
+      - "v*.*.*"
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
+  schedule:
+    - cron: "39 5 1,15 * *"
   workflow_dispatch:
     inputs:
       publish_artifacts:
@@ -74,3 +79,7 @@ jobs:
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v0.1.15
         with:
           generate_release_notes: true
+          
+          
+todo: use Gradle build plugin wiht dependency submission.
+
