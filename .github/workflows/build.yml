@@ -49,6 +49,8 @@ jobs:
       - name: Build
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: runtimeClasspath
+          DEPENDENCY_GRAPH_INCLUDE_PROJECTS: "^(?!test-).*"
         run: ./gradlew build coveralls
       - name: Publish
         if: github.event_name == 'push' || github.event.inputs.publish_artifacts == 'true'
@@ -58,6 +60,7 @@ jobs:
           ORG_GRADLE_PROJECT_SONA_USERNAME: ${{ secrets.SONA_USERNAME }}
           ORG_GRADLE_PROJECT_SONA_PASSWORD: ${{ secrets.SONA_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPENDENCY_GRAPH_INCLUDE_PROJECTS: "" # i.e. none
         run: |
           ./gradlew cV
           ./gradlew publish closeAndReleaseStagingRepository
@@ -68,6 +71,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
           GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+          DEPENDENCY_GRAPH_INCLUDE_PROJECTS: "" # i.e. none
         run: |
           ./gradlew -Dgradle.publish.key="$GRADLE_PUBLISH_KEY" -Dgradle.publish.secret="$GRADLE_PUBLISH_SECRET" publishPlugins
 
