@@ -26,4 +26,8 @@ dependencies {
     implementation("com.github.spotbugs:spotbugs-annotations:$spotBugsVersion")
 
     // Do not add any other non-test runtime dependencies
+
+
+    // Add temp BAD dependency to check depenency checker is working:
+    implementation("commons-collections:commons-collections:3.2.1")
 }
