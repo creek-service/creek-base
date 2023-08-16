@@ -1,19 +1,20 @@
-name: Submit dependencies
+name: Dependencies
 
 on:
   push:
     branches: [ main ]
     tags: [ "v*.*.*" ]
+  schedule:
+    - cron: "39 5 1,15 * *"
   pull_request:
     branches: [ main ]
 
-permissions:
-  contents: read
+permissions: read-all
 
 jobs:
-  submit-deps:
+  submit-dependencies:
     permissions:
-      contents: write
+      contents: write # required to submit dependencies report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
@@ -33,19 +34,3 @@ jobs:
           DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: runtimeClasspath
           DEPENDENCY_GRAPH_INCLUDE_PROJECTS: "^:(?!(buildSrc|test-)).*"
         run: ./gradlew allDeps --configuration runtimeClasspath
-
-  check-dependencies:
-    needs: submit-deps
-    permissions:
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.0.0
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v3
-        with:
-          comment-summary-in-pr: true
-          # Think carefully about the implications of adding dependencies with new licence types.
-          # Licence ids: https://spdx.org/licenses/
-          # License risks: https://brainhub.eu/library/open-source-licenses-to-avoid
-          allow-licenses: MIT
