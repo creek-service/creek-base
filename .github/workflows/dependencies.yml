@@ -30,4 +30,7 @@ jobs:
           dependency-graph: generate-and-submit
           gradle-home-cache-cleanup: true
       - name: Generate dependency report
-        run: ./gradlew allDeps
+        run: ./gradlew dependencies allDeps
+      - name: Generate dependency report for buildSrc
+        run: (cd buildSrc && ../gradlew dependencies)
+
