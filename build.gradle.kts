@@ -50,7 +50,7 @@ subprojects {
         set("creekVersion", "0.4.2-SNAPSHOT")
 
         set("spotBugsVersion", "4.7.3")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
-        set("classGraphVersion", "4.8.162")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
+        set("classGraphVersion", "4.8.163")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
         set("guavaVersion", "32.1.2-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
         set("log4jVersion", "2.20.0")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 
