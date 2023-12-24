@@ -25,6 +25,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import org.junit.jupiter.api.Test;
@@ -194,6 +195,7 @@ class SystemEnvTest {
 
     @SuppressWarnings("unused") // Invoked via reflection
     public static class BadThing implements Thing {
+        @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
         BadThing() {
             throw new RuntimeException("Big Bada Boom");
         }
