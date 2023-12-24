@@ -193,7 +193,7 @@ class SystemEnvTest {
     }
 
     @SuppressWarnings("unused") // Invoked via reflection
-    public static class BadThing implements Thing {
+    public static final class BadThing implements Thing {
         BadThing() {
             throw new RuntimeException("Big Bada Boom");
         }
