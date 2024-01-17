@@ -5,6 +5,7 @@ module creek.base.type {
 
     exports org.creekservice.api.base.type;
     exports org.creekservice.api.base.type.config;
-    exports org.creekservice.api.base.type.temporal;
     exports org.creekservice.api.base.type.json;
+    exports org.creekservice.api.base.type.temporal;
+    exports org.creekservice.api.base.type.schema;
 }
