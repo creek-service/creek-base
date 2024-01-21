@@ -4,5 +4,4 @@ module creek.base.schema {
     requires io.github.classgraph;
 
     exports org.creekservice.api.base.schema;
-    exports org.creekservice.api.base.schema.naming;
 }
