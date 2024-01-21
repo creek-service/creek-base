@@ -20,15 +20,19 @@ import static org.creekservice.api.base.type.CodeLocation.codeLocation;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.nio.file.Path;
+import java.io.File;
 import org.creekservice.api.test.util.TestPaths;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
 class CodeLocationTest {
 
-    private static final Path CODE_LOCATION =
-            TestPaths.moduleRoot("type").resolve("build/classes/java/test").toAbsolutePath();
+    private static final String CODE_LOCATION =
+            TestPaths.moduleRoot("type")
+                    .resolve("build/classes/java/test")
+                    .toAbsolutePath()
+                    .toString()
+                    .replaceAll(File.pathSeparator, "/");
 
     @Test
     void shouldGetLocationFromInstance() {
