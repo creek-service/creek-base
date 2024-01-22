@@ -20,7 +20,6 @@ import static org.creekservice.api.base.type.CodeLocation.codeLocation;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.io.File;
 import org.creekservice.api.test.util.TestPaths;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -29,20 +28,20 @@ class CodeLocationTest {
 
     private static final String CODE_LOCATION =
             TestPaths.moduleRoot("type")
-                    .resolve("build/classes/java/test")
-                    .toAbsolutePath()
-                    .toString()
-                    .replaceAll(File.pathSeparator, "/");
+                            .resolve("build/classes/java/test")
+                            .toAbsolutePath()
+                            .toString()
+                            .replaceAll("\\\\", "/")
+                    + "/";
 
     @Test
     void shouldGetLocationFromInstance() {
-        assertThat(codeLocation(this), is("file:" + CODE_LOCATION + "/"));
+        assertThat(codeLocation(this), is("file:" + CODE_LOCATION));
     }
 
     @Test
     void shouldGetLocationFromType() {
-        MatcherAssert.assertThat(
-                codeLocation(CodeLocationTest.class), is("file:" + CODE_LOCATION + "/"));
+        MatcherAssert.assertThat(codeLocation(CodeLocationTest.class), is("file:" + CODE_LOCATION));
     }
 
     @Test
