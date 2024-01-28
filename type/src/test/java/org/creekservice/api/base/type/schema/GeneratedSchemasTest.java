@@ -29,7 +29,7 @@ class GeneratedSchemasTest {
         assertThat(
                 GeneratedSchemas.schemaFileName(
                         GeneratedSchemasTest.class, GeneratedSchemas.yamlExtension()),
-                is(Path.of("org.creekservice.api.base.type.schema.generated_schemas_test.yml")));
+                is(Path.of("org/creekservice/api/base/type/schema/GeneratedSchemasTest.yml")));
     }
 
     @Test
@@ -38,7 +38,7 @@ class GeneratedSchemasTest {
                 GeneratedSchemas.schemaFileName(Nested.class, GeneratedSchemas.yamlExtension()),
                 is(
                         Path.of(
-                                "org.creekservice.api.base.type.schema.generated_schemas_test$nested.yml")));
+                                "org/creekservice/api/base/type/schema/GeneratedSchemasTest$Nested.yml")));
     }
 
     @Test
@@ -51,7 +51,7 @@ class GeneratedSchemasTest {
                 GeneratedSchemas.schemaFileName(Model.class, GeneratedSchemas.yamlExtension()),
                 is(
                         Path.of(
-                                "org.creekservice.api.base.type.schema.generated_schemas_test$1_model.yml")));
+                                "org/creekservice/api/base/type/schema/GeneratedSchemasTest$1Model.yml")));
     }
 
     private static final class Nested {}
