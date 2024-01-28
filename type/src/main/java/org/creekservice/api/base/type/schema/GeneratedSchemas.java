@@ -20,6 +20,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
 
 /**
  * Utility class for working with {@link
@@ -46,7 +47,8 @@ public final class GeneratedSchemas {
         final String className = idx == -1 ? fullName : fullName.substring(idx + 1);
         final String packageName = idx == -1 ? "" : fullName.substring(0, idx);
 
-        final String directory = packageName.replaceAll("\\.", File.separator);
+        final String directory =
+                packageName.replaceAll("\\.", Matcher.quoteReplacement(File.separator));
         return Paths.get(directory, className + extension);
     }
 
