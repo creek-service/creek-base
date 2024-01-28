@@ -17,8 +17,10 @@
 package org.creekservice.api.base.type.schema;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
 
 /**
  * Utility class for working with {@link
@@ -29,7 +31,9 @@ public final class GeneratedSchemas {
     private GeneratedSchemas() {}
 
     /**
-     * The schema filename for a given type.
+     * The path to a schema for a given type.
+     *
+     * <p>Schemas are generated into the same package as the source type.
      *
      * @param type the type
      * @param extension the expected file extension, e.g. {@code ".yml"}.
@@ -37,14 +41,15 @@ public final class GeneratedSchemas {
      */
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "False positive")
     public static Path schemaFileName(final Class<?> type, final String extension) {
-        final String name =
-                type.getName()
-                        .replaceAll("([A-Z])", "_$1")
-                        .replaceFirst("_", "")
-                        .replaceAll("\\$_", "\\$")
-                        .toLowerCase();
+        final String fullName = type.getName();
+        final int idx = fullName.lastIndexOf(".");
 
-        return Paths.get(name + extension);
+        final String className = idx == -1 ? fullName : fullName.substring(idx + 1);
+        final String packageName = idx == -1 ? "" : fullName.substring(0, idx);
+
+        final String directory =
+                packageName.replaceAll("\\.", Matcher.quoteReplacement(File.separator));
+        return Paths.get(directory, className + extension);
     }
 
     /**
