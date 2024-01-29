@@ -17,10 +17,6 @@
 package org.creekservice.api.base.type.schema;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.regex.Matcher;
 
 /**
  * Utility class for working with {@link
@@ -40,16 +36,15 @@ public final class GeneratedSchemas {
      * @return the filename the schema will be stored in.
      */
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "False positive")
-    public static Path schemaFileName(final Class<?> type, final String extension) {
+    public static String schemaFileName(final Class<?> type, final String extension) {
         final String fullName = type.getName();
         final int idx = fullName.lastIndexOf(".");
 
         final String className = idx == -1 ? fullName : fullName.substring(idx + 1);
         final String packageName = idx == -1 ? "" : fullName.substring(0, idx);
 
-        final String directory =
-                packageName.replaceAll("\\.", Matcher.quoteReplacement(File.separator));
-        return Paths.get(directory, className + extension);
+        final String directory = packageName.replaceAll("\\.", "/");
+        return directory + "/" + className + extension;
     }
 
     /**
