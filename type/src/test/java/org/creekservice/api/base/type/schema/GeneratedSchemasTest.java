@@ -18,8 +18,9 @@ package org.creekservice.api.base.type.schema;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
-import java.nio.file.Path;
+import java.net.URL;
 import org.junit.jupiter.api.Test;
 
 class GeneratedSchemasTest {
@@ -29,16 +30,14 @@ class GeneratedSchemasTest {
         assertThat(
                 GeneratedSchemas.schemaFileName(
                         GeneratedSchemasTest.class, GeneratedSchemas.yamlExtension()),
-                is(Path.of("org/creekservice/api/base/type/schema/GeneratedSchemasTest.yml")));
+                is("org/creekservice/api/base/type/schema/GeneratedSchemasTest.yml"));
     }
 
     @Test
     void shouldWriteSchemaForNestedType() {
         assertThat(
                 GeneratedSchemas.schemaFileName(Nested.class, GeneratedSchemas.yamlExtension()),
-                is(
-                        Path.of(
-                                "org/creekservice/api/base/type/schema/GeneratedSchemasTest$Nested.yml")));
+                is("org/creekservice/api/base/type/schema/GeneratedSchemasTest$Nested.yml"));
     }
 
     @Test
@@ -49,9 +48,21 @@ class GeneratedSchemasTest {
         // Then:
         assertThat(
                 GeneratedSchemas.schemaFileName(Model.class, GeneratedSchemas.yamlExtension()),
-                is(
-                        Path.of(
-                                "org/creekservice/api/base/type/schema/GeneratedSchemasTest$1Model.yml")));
+                is("org/creekservice/api/base/type/schema/GeneratedSchemasTest$1Model.yml"));
+    }
+
+    @Test
+    void shouldBuildPathThatCanBeLoadedAsResource() {
+        // Given:
+        final String path =
+                GeneratedSchemas.schemaFileName(
+                        GeneratedSchemasTest.class, GeneratedSchemas.yamlExtension());
+
+        // When:
+        final URL resource = getClass().getResource("/" + path);
+
+        // Then:
+        assertThat(resource, is(notNullValue()));
     }
 
     private static final class Nested {}
