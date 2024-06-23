@@ -64,7 +64,7 @@ val coverage = tasks.register<JacocoReport>("coverage") {
 
 coveralls {
     sourceDirs = allprojects.flatMap{it.sourceSets.main.get().allSource.srcDirs}.map{it.toString()}
-    jacocoReportPath = "$buildDir/reports/jacoco/coverage/coverage.xml"
+    jacocoReportPath = layout.buildDirectory.file("reports/jacoco/coverage/coverage.xml")
 }
 
 tasks.coveralls {
