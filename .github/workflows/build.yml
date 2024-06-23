@@ -47,21 +47,21 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: ./gradlew build coveralls
       - name: Upload Checkstyle reports
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: checkstyle-reports-linux
           path: '**/build/reports/checkstyle/*.xml'
           retention-days: 5
       - name: Upload Spotbugs reports
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: spotbugs-reports-linux
           path: '**/build/reports/spotbugs/*.xml'
           retention-days: 5
       - name: Upload Test Results
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: test-results-linux
@@ -106,21 +106,21 @@ jobs:
       - name: Build
         run: ./gradlew.bat build -PexcludeContainerised
       - name: Upload Checkstyle reports
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: checkstyle-reports-win
           path: '**/build/reports/checkstyle/*.xml'
           retention-days: 5
       - name: Upload Spotbugs reports
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: spotbugs-reports-win
           path: '**/build/reports/spotbugs/*.xml'
           retention-days: 5
       - name: Upload Test Results
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: test-results-win
