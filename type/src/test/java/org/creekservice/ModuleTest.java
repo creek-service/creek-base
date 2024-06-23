@@ -16,6 +16,9 @@
 
 package org.creekservice;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 import org.creekservice.api.test.conformity.ConformityTester;
 import org.junit.jupiter.api.Test;
 
@@ -24,5 +27,10 @@ class ModuleTest {
     @Test
     void shouldConform() {
         ConformityTester.test(ModuleTest.class);
+    }
+
+    @Test
+    void shouldFail() {
+        assertThat(true, is(false));
     }
 }
