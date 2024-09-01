@@ -51,7 +51,7 @@ subprojects {
 
         set("spotBugsVersion", "4.8.6")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.175")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
-        set("guavaVersion", "33.2.1-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
+        set("guavaVersion", "33.3.0-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
         set("log4jVersion", "2.23.1")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 
         set("junitVersion", "5.11.0")            // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
