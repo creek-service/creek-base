@@ -17,9 +17,9 @@
 /**
  * Standard coverage configuration of Creek projects, utilising Jacoco and Coveralls.io
  *
- * <p>Version: 1.1
- *
- * <p>Apply to root project only
+ * <p>Versions:
+ *  - 1.3: remove deprecated use of $buildDir
+ *  - 1.2: Apply to root project only
  */
 
 plugins {
@@ -48,10 +48,10 @@ val coverage = tasks.register<JacocoReport>("coverage") {
 
     allprojects {
         val proj = this
-        // Roll results of each (test) task that has Jacoco extension, i.e. plugin applied, into the main coverage task
-        proj.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null && it != coverageReportTask }.forEach {
+        // Roll results of each test task into the main coverage task:
+        proj.tasks.matching { it.extensions.findByType<JacocoTaskExtension>() != null }.forEach {
             coverageReportTask.sourceSets(proj.sourceSets.main.get())
-            coverageReportTask.executionData(files(proj.tasks.withType<Test>()).filter { it.exists() && it.name.endsWith(".exec") })
+            coverageReportTask.executionData(it.extensions.findByType<JacocoTaskExtension>()!!.destinationFile)
             coverageReportTask.dependsOn(it)
         }
     }
