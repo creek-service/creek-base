@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2025 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  */
 
 package org.creekservice.api.base.type.schema;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Utility class for working with {@link
@@ -35,7 +33,6 @@ public final class GeneratedSchemas {
      * @param extension the expected file extension, e.g. {@code ".yml"}.
      * @return the filename the schema will be stored in.
      */
-    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN", justification = "False positive")
     public static String schemaFileName(final Class<?> type, final String extension) {
         final String fullName = type.getName();
         final int idx = fullName.lastIndexOf(".");
