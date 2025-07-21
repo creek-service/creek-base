@@ -25,6 +25,10 @@ plugins {
     id("pl.allegro.tech.build.axion-release") version "1.19.0" // https://plugins.gradle.org/plugin/pl.allegro.tech.build.axion-release
 }
 
+scmVersion {
+    versionCreator("simple")
+}
+
 project.version = scmVersion.version
 
 allprojects {
@@ -47,7 +51,7 @@ subprojects {
     }
 
     extra.apply {
-        set("creekVersion", "0.4.4-SNAPSHOT")
+        set("creekVersion", project.version)
 
         set("spotBugsVersion", "4.9.3")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.180")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
