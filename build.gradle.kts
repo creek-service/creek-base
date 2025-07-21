@@ -64,6 +64,7 @@ subprojects {
     }
 
     val creekVersion : String by extra
+    println("creekVersion: $creekVersion")
     val guavaVersion : String by extra
     val log4jVersion : String by extra
     val junitVersion: String by extra
