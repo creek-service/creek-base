@@ -47,7 +47,7 @@ subprojects {
     }
 
     extra.apply {
-        set("creekVersion", "0.4.2-SNAPSHOT")
+        set("creekVersion", "0.4.3")
 
         set("spotBugsVersion", "4.9.3")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
         set("classGraphVersion", "4.8.180")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
