@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2023-2025 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,15 @@ plugins {
     `creek-coverage-convention`
     `creek-publishing-convention` apply false
     `creek-sonatype-publishing-convention`
-    id("pl.allegro.tech.build.axion-release") version "1.15.4" // https://plugins.gradle.org/plugin/pl.allegro.tech.build.axion-release
+    id("pl.allegro.tech.build.axion-release") version "1.21.1" // https://plugins.gradle.org/plugin/pl.allegro.tech.build.axion-release
+}
+
+scmVersion {
+    versionCreator("simple")
 }
 
 project.version = scmVersion.version
+println("creekVersion: ${project.version}")
 
 allprojects {
     tasks.jar {
@@ -47,17 +52,16 @@ subprojects {
     }
 
     extra.apply {
-        set("creekVersion", "0.4.2-SNAPSHOT")
+        set("creekVersion", project.version)
 
-        set("spotBugsVersion", "4.7.3")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
-        set("classGraphVersion", "4.8.161")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
-        set("guavaVersion", "32.1.2-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
-        set("log4jVersion", "2.20.0")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+        set("spotBugsVersion", "4.9.8")         // https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations
+        set("classGraphVersion", "4.8.184")     // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
+        set("guavaVersion", "33.5.0-jre")         // https://mvnrepository.com/artifact/com.google.guava/guava
+        set("log4jVersion", "2.25.4")           // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
 
-        set("junitVersion", "5.10.0")            // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-        set("junitPioneerVersion", "2.0.1")     // https://mvnrepository.com/artifact/org.junit-pioneer/junit-pioneer
-        set("mockitoVersion", "5.5.0")          // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
-        set("hamcrestVersion", "2.2")           // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core
+        set("junitVersion", "6.0.3")            // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+        set("junitPioneerVersion", "2.3.0")     // https://mvnrepository.com/artifact/org.junit-pioneer/junit-pioneer
+        set("mockitoVersion", "5.23.0")          // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
     }
 
     val creekVersion : String by extra
@@ -66,7 +70,6 @@ subprojects {
     val junitVersion: String by extra
     val junitPioneerVersion: String by extra
     val mockitoVersion: String by extra
-    val hamcrestVersion : String by extra
 
     dependencies {
         testImplementation("org.creekservice:creek-test-util:$creekVersion")
@@ -76,11 +79,9 @@ subprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
         testImplementation("org.junit-pioneer:junit-pioneer:$junitPioneerVersion")
         testImplementation("org.mockito:mockito-junit-jupiter:$mockitoVersion")
-        testImplementation("org.hamcrest:hamcrest-core:$hamcrestVersion")
         testImplementation("com.google.guava:guava-testlib:$guavaVersion")
-        testImplementation("org.apache.logging.log4j:log4j-core:$log4jVersion")
-        testImplementation("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jVersion")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+        testRuntimeOnly("org.apache.logging.log4j:log4j-slf4j2-impl:$log4jVersion")
+        testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     }
 }
 

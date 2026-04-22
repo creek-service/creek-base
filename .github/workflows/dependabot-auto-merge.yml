@@ -1,6 +1,6 @@
 # A Workflow for auto-approving and auto-merging dependency update PRs raised by Dependabot
 
-name: Dependabot
+name: Dependabot Auto-merge
 on:
   pull_request:
     branches: [ main ]
@@ -18,17 +18,18 @@ jobs:
     steps:
       - name: Dependabot metadata
         id: metadata
-        uses: dependabot/fetch-metadata@c9c4182bf1b97f5224aee3906fd373f6b61b4526 # v1.6.0
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Approve PR
+        if: ${{ steps.metadata.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Enable auto-merge for Dependabot PRs
-        if: ${{ steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major' }}
+        if: ${{ steps.metadata.outputs.update-type != 'version-update:semver-major' }}
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.TRIGGER_GITHUB_TOKEN}}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2023-2025 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ val spotBugsVersion : String by extra
 
 dependencies {
     api(project(":annotation"))
-
-    implementation("com.github.spotbugs:spotbugs-annotations:$spotBugsVersion")
+    api("com.github.spotbugs:spotbugs-annotations:$spotBugsVersion")
 
     // Do not add any other non-test runtime dependencies
 }

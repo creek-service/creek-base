@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2022-2025 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,9 +78,9 @@ publishing {
                 name.set("${project.group}:${artifactId}")
 
                 if (prependRootName) {
-                    description.set("${rootProject.name.capitalize()} ${project.name} library".replace("-", " "))
+                    description.set("${rootProject.name} ${project.name} library".replace("-", " "))
                 } else {
-                    description.set("${project.name.capitalize()} library".replace("-", " "))
+                    description.set("${project.name} library".replace("-", " "))
                 }
 
                 url.set("https://www.creekservice.org")

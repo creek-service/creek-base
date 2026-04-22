@@ -1,5 +1,5 @@
 /*
- * Copyright 2022-2023 Creek Contributors (https://github.com/creek-service)
+ * Copyright 2022-2025 Creek Contributors (https://github.com/creek-service)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -193,7 +193,7 @@ class SystemEnvTest {
     }
 
     @SuppressWarnings("unused") // Invoked via reflection
-    public static class BadThing implements Thing {
+    public static final class BadThing implements Thing {
         BadThing() {
             throw new RuntimeException("Big Bada Boom");
         }
