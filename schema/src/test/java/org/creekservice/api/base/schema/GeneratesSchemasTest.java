@@ -75,7 +75,7 @@ class GeneratesSchemasTest {
     void shouldFindTypesUsingWildcardInPackageName() {
         // When:
         final Set<Class<?>> result =
-                GeneratesSchemas.scanner().withAllowedPackages("org.creekservice.*.schema").scan();
+                GeneratesSchemas.scanner().withAllowedPackages("org.creekservice.**.schema").scan();
 
         // Then:
         assertThat(result, hasItem(PublicTestType.class));
@@ -175,7 +175,7 @@ class GeneratesSchemasTest {
         // When:
         final Set<Class<?>> result =
                 GeneratesSchemas.scanner()
-                        .withAllowedPackages("*.api.*")
+                        .withAllowedPackages("**.api.**")
                         .withAllowedModules("creek.base.test.module")
                         .scan();
 

@@ -58,7 +58,8 @@ public final class GeneratesSchemas {
          * packages restricts the returned types to only those under the allowed packages.
          *
          * @param allowedPackages allowed packages to add. Package names may include the glob
-         *     wildcard {@code *} character.
+         *     wildcard {@code *} character to match a single package segment, or {@code **} to
+         *     match multiple package segments.
          * @return self
          */
         public Scanner withAllowedPackages(final Collection<String> allowedPackages) {
@@ -73,7 +74,8 @@ public final class GeneratesSchemas {
          * packages restricts the returned types to only those under the allowed packages.
          *
          * @param allowedPackages allowed packages to add. Package names may include the glob
-         *     wildcard {@code *} character.
+         *     wildcard {@code *} character to match a single package segment, or {@code **} to
+         *     match multiple package segments.
          * @return self
          */
         public Scanner withAllowedPackages(final String... allowedPackages) {
