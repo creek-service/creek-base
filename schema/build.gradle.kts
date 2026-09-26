@@ -18,7 +18,7 @@ plugins {
     `java-library`
 }
 
-val classGraphVersion : String by extra
+val classGraphVersion : String by project
 
 dependencies {
     implementation(project(":annotation"))
