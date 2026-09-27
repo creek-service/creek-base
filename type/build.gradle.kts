@@ -18,11 +18,9 @@ plugins {
     `java-library`
 }
 
-val spotBugsVersion = project.property("spotBugsVersion") as String
-
 dependencies {
     api(project(":annotation"))
-    api("com.github.spotbugs:spotbugs-annotations:$spotBugsVersion")
+    api("com.github.spotbugs:spotbugs-annotations:${property("spotBugsVersion")}")
 
     // Do not add any other non-test runtime dependencies
 }
