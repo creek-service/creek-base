@@ -18,7 +18,7 @@ plugins {
     `java-library`
 }
 
-val spotBugsVersion : String by project
+val spotBugsVersion = project.property("spotBugsVersion") as String
 
 dependencies {
     api(project(":annotation"))
