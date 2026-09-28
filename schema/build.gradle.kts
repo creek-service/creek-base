@@ -18,11 +18,9 @@ plugins {
     `java-library`
 }
 
-val classGraphVersion : String by extra
-
 dependencies {
     implementation(project(":annotation"))
-    implementation("io.github.classgraph:classgraph:$classGraphVersion")
+    implementation("io.github.classgraph:classgraph:${property("classGraphVersion")}")
 
     testImplementation(project(":test-module"))
 }
